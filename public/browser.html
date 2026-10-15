@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f9fa" />
+    <title>BlueberryUB Browser</title>
+    <link rel="icon" href="/logo/blueub.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="/chrome.css" />
+    <script src="/vendor/supabase/supabase.js"></script>
+    <script src="/supabase-config.js"></script>
+    <script src="/bootstrap-init.js"></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="browser-app">
+      <nav class="tab-strip" aria-label="Browser tabs">
+        <div class="tab-list" id="tab-list" role="tablist" aria-label="Open tabs"></div>
+        <button class="new-tab-button" id="new-tab-button" type="button" aria-label="New tab" title="New tab (Ctrl+T)">
+          <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-plus" /></svg>
+        </button>
+        <button class="private-mode-toggle" id="private-mode-button" type="button" aria-pressed="false" title="Private mode won’t save Blueberry history or bookmarks; websites may retain their own data.">
+          <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-private" /></svg>
+          <span>Private</span>
+        </button>
+      </nav>
+
+      <form class="address-toolbar" id="address-form">
+        <div class="nav-controls" aria-label="Page controls">
+          <button class="chrome-icon-button" id="back-button" type="button" aria-label="Go back" title="Back (Alt+Left)" disabled>
+            <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-back" /></svg>
+          </button>
+          <button class="chrome-icon-button" id="forward-button" type="button" aria-label="Go forward" title="Forward (Alt+Right)" disabled>
+            <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-forward" /></svg>
+          </button>
+          <button class="chrome-icon-button" id="reload-button" type="button" aria-label="Reload page" title="Reload (Ctrl+R)" disabled>
+            <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-reload" /></svg>
+          </button>
+          <button class="chrome-icon-button home-button" id="home-button" type="button" aria-label="New tab page" title="New tab page">
+            <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-home" /></svg>
+          </button>
+        </div>
+        <div class="omnibox">
+          <svg class="icon omnibox-globe" aria-hidden="true"><use href="/icons.svg#icon-globe" /></svg>
+          <input id="address-input" name="url" type="text" inputmode="search" autocomplete="off" aria-label="Search DuckDuckGo or enter a web address" placeholder="Search DuckDuckGo or enter an address" spellcheck="false" required />
+          <button class="bookmark-button" id="bookmark-button" type="button" aria-label="Bookmark this page" title="Bookmark this page">
+            <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-star" /></svg>
+          </button>
+        </div>
+        <button class="go-button" type="submit" aria-label="Go to address" title="Go">
+          <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-enter" /></svg>
+        </button>
+        <button class="chrome-icon-button toolbar-fullscreen" id="fullscreen-button" type="button" aria-label="Enter fullscreen" title="Fullscreen (F11)">
+          <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-fullscreen" /></svg>
+        </button>
+        <div class="browser-menu-wrap">
+          <button class="chrome-icon-button menu-toggle" id="menu-toggle" type="button" aria-label="Browser menu" aria-haspopup="menu" aria-expanded="false" title="Browser menu">
+            <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-menu-dots" /></svg>
+          </button>
+          <div class="browser-menu" id="browser-menu" role="menu" aria-label="Browser menu" hidden>
+            <button type="button" role="menuitem" id="menu-new-tab">New tab <kbd>Ctrl+T</kbd></button>
+            <button type="button" role="menuitem" id="menu-private-window">New private window</button>
+            <div class="menu-divider"></div>
+            <button type="button" role="menuitem" id="menu-history">History</button>
+            <button type="button" role="menuitem" id="menu-bookmarks">Bookmarks</button>
+            <button type="button" role="menuitem" id="menu-restore-tab">Restore closed tab</button>
+            <button type="button" role="menuitem" id="menu-clear-data">Clear browsing data</button>
+            <div class="menu-divider"></div>
+            <div class="menu-zoom" aria-label="Zoom controls">
+              <span>Zoom</span>
+              <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+              <output id="zoom-level">100%</output>
+              <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+              <button type="button" id="zoom-reset" aria-label="Reset zoom">Reset</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="bookmark-bar" id="bookmark-bar" aria-label="Bookmarks"></div>
+      <p class="private-notice" id="private-notice" hidden>Private mode: Blueberry won’t save history or bookmarks. Websites may still retain cookies or other site data.</p>
+      <section class="history-view" id="history-view" aria-label="Browsing history" hidden>
+        <header class="history-view-header">
+          <div>
+            <p class="eyebrow">BLUEBERRY</p>
+            <h1>History</h1>
+          </div>
+          <div class="history-view-actions">
+            <input id="history-search" type="search" placeholder="Search history" aria-label="Search history" />
+            <button class="chrome-icon-button" id="clear-history-button" type="button" title="Clear browsing history" aria-label="Clear browsing history">
+              <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-trash" /></svg>
+            </button>
+            <button class="chrome-icon-button" id="close-history-button" type="button" title="Close history" aria-label="Close history">
+              <svg class="icon" aria-hidden="true"><use href="/icons.svg#icon-close" /></svg>
+            </button>
+          </div>
+        </header>
+        <p class="history-view-status" id="history-view-status" role="status"></p>
+        <div class="history-view-list" id="history-view-list"></div>
+      </section>
+      <section class="browser-stage" id="browser-stage" aria-label="Browser content">
+        <div class="page-host" id="page-host"></div>
+      </section>
+    </main>
+    <span id="page-status" class="sr-only" aria-live="polite">New tab</span>
+  </body>
+</html>

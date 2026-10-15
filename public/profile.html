@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#e9eef2" />
+    <title>Profile - BlueberryUB</title>
+    <link rel="icon" href="/logo/blueub.png" />
+    <link rel="stylesheet" href="/profile.css" />
+    <script src="/vendor/supabase/supabase.js"></script>
+    <script src="/supabase-config.js"></script>
+    <script src="/profile.js" defer></script>
+  </head>
+  <body>
+    <main class="profile-page">
+      <header class="profile-header">
+        <a class="back-home" href="/" aria-label="Back to BlueberryUB home">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7" /></svg>
+          <img src="/logo/blueub.png" alt="" />
+          <span>BlueberryUB</span>
+        </a>
+        <span class="header-label">PROFILE</span>
+      </header>
+
+      <section class="profile-content">
+        <div class="profile-heading">
+          <span class="profile-mark"><img src="/logo/blueub.png" alt="" /></span>
+          <div>
+            <p class="eyebrow">YOUR BLUEBERRY</p>
+            <h1>Profile</h1>
+            <p class="heading-copy">Manage your account and private browsing history.</p>
+          </div>
+        </div>
+
+        <p class="notice" id="notice" role="status" hidden></p>
+        <section class="auth-panel" id="auth-panel" aria-label="Account access" hidden>
+          <div class="auth-tabs" role="tablist" aria-label="Account actions">
+            <button class="auth-tab is-active" id="signin-tab" type="button" role="tab" aria-selected="true">Sign in</button>
+            <button class="auth-tab" id="signup-tab" type="button" role="tab" aria-selected="false">Create account</button>
+          </div>
+          <form id="auth-form" class="form-stack">
+            <label id="display-name-field" hidden>
+              <span>Display name</span>
+              <input id="display-name" name="display-name" type="text" maxlength="40" autocomplete="nickname" />
+            </label>
+            <label>
+              <span>Email</span>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </label>
+            <label>
+              <span>Password</span>
+              <input id="password" name="password" type="password" minlength="8" autocomplete="current-password" required />
+            </label>
+            <button class="primary-button" id="auth-submit" type="submit">Sign in</button>
+          </form>
+          <p class="form-note">Use at least 8 characters for your password.</p>
+        </section>
+
+        <section class="account-panel" id="account-panel" aria-label="Your account" hidden>
+          <div class="account-summary">
+            <span class="account-avatar"><img src="/logo/blueub.png" alt="" /></span>
+            <div class="account-details">
+              <h2 id="account-name">Blueberry member</h2>
+              <p id="account-email"></p>
+            </div>
+            <button class="quiet-button" id="signout-button" type="button">Sign out</button>
+          </div>
+
+          <div class="setup-guide" id="setup-guide" hidden>
+            <strong>Database setup is still needed</strong>
+            <p>Run the original profiles migration, then <code>supabase/migrations/20261015000100_history_and_remove_admin.sql</code> in Supabase SQL Editor to enable browsing history.</p>
+          </div>
+
+          <form id="profile-form" class="display-name-form">
+            <label for="profile-display-name">Display name</label>
+            <div class="inline-form">
+              <input id="profile-display-name" type="text" maxlength="40" autocomplete="nickname" />
+              <button class="secondary-button" type="submit">Save</button>
+            </div>
+          </form>
+
+          <section class="history-panel" aria-labelledby="history-title">
+            <div class="history-heading">
+              <div>
+                <h3 id="history-title">Browsing history</h3>
+                <p>Private to your account. Saving is optional.</p>
+              </div>
+              <div class="history-actions">
+                <label class="history-toggle" for="history-enabled">
+                  <input id="history-enabled" type="checkbox" />
+                  <span>Save</span>
+                </label>
+                <button class="quiet-button" id="clear-history-button" type="button">Clear</button>
+              </div>
+            </div>
+            <p class="history-status" id="history-status" role="status">Loading history…</p>
+            <div class="history-list" id="history-list"></div>
+          </section>
+
+          <details class="danger-zone">
+            <summary>Delete account</summary>
+            <p>This permanently deletes your BlueberryUB account. It cannot be undone.</p>
+            <button class="danger-button" id="delete-account-button" type="button">Delete my account</button>
+          </details>
+        </section>
+
+        <p class="legal-note">History is saved only when signed in with saving enabled. The public browser works without an account.</p>
+      </section>
+    </main>
+  </body>
+</html>

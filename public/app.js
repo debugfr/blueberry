@@ -187,7 +187,7 @@ function makeStartPage() {
   const title = document.createElement("h1");
   title.textContent = "A fresh start.";
   const subtitle = document.createElement("p");
-  subtitle.textContent = "A little browser made by Christian Hall.";
+  subtitle.textContent = "A browser created by Christian Hall. (the goat)";
   identity.append(logo, title, subtitle);
 
   const links = document.createElement("div");

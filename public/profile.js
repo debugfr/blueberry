@@ -233,7 +233,7 @@ document.querySelector("#clear-history-button").addEventListener("click", async 
 async function initialize() {
   if (!config?.url || !config?.publishableKey || !window.supabase?.createClient) {
     authPanel.hidden = true;
-    showNotice("Supabase is not configured. Check the local server environment.", "error");
+    showNotice("Profile feature not added yet, being added for version 0.0.2.", "error");
     return;
   }
 

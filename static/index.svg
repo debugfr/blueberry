@@ -21,6 +21,51 @@
         @media(max-height:560px) and (orientation:landscape){.hub{width:min(84vh,520px)}.logo-frame{width:clamp(100px,19vh,138px)}}@media(prefers-reduced-motion:reduce){.hub,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
         .boot-screen{position:fixed;z-index:100;inset:0;display:grid;place-items:center;padding:24px;background:rgba(233,238,242,.98);backdrop-filter:blur(14px);transition:opacity .24s ease}.boot-screen[hidden]{display:none}.boot-card{width:min(100%,390px);padding:34px 30px 28px;color:#344459;background:#fff;border:1px solid #dce5eb;border-radius:18px;box-shadow:0 20px 60px rgba(38,61,78,.15);text-align:center}.boot-emblem{width:74px;height:74px;position:relative;display:grid;place-items:center;margin:0 auto 20px}.boot-emblem svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.boot-emblem circle{fill:none;stroke:#dbe7ed;stroke-width:2}.boot-emblem .boot-orbit{stroke:#3e88a9;stroke-dasharray:64 156;stroke-linecap:round;transform-origin:center;animation:boot-orbit 1.15s linear infinite}.boot-emblem img{width:43px;height:43px;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(35,71,97,.16))}.boot-kicker{margin:0 0 7px;color:#55849a;font:700 9px monospace;letter-spacing:1.5px}.boot-card h1{margin:0;color:#293d50;font-size:20px;letter-spacing:-.4px}.boot-message{min-height:34px;margin:9px 0 18px;color:#778695;font-size:12px;line-height:1.5}.boot-progress{height:4px;overflow:hidden;background:#e8eff3;border-radius:99px}.boot-progress span{width:100%;height:100%;display:block;background:linear-gradient(90deg,#367b9b,#83b8c5);border-radius:inherit;transform:scaleX(.08);transform-origin:left;transition:transform .25s ease}.boot-screen[data-state="error"] .boot-progress span{background:#c97070}.boot-actions{display:flex;justify-content:center;gap:8px;margin-top:18px}.boot-actions button{min-height:34px;padding:0 13px;color:white;background:#367b9b;border:0;border-radius:6px;font-size:11px;font-weight:700}.boot-actions button.secondary{color:#5d7180;background:#edf2f5}.boot-actions button:hover{filter:brightness(.96)}@keyframes boot-orbit{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.boot-emblem .boot-orbit{animation:none}.boot-screen,.boot-progress span{transition:none}}
       ]]></style>
+      <style>
+        .find-bar{position:absolute;z-index:12;top:10px;right:14px;display:flex;align-items:center;gap:4px;padding:5px;background:#fff;border:1px solid #dce4e9;border-radius:6px;box-shadow:0 6px 20px rgba(28,43,55,.16)}
+        .find-bar input{width:190px;height:29px;padding:0 8px;color:#344459;border:1px solid #dce4e9;border-radius:4px;font-size:11px}
+        .find-bar button,.dialog-header button{width:29px;height:29px;color:#627286;background:transparent;border:0;border-radius:4px}
+        .find-bar button:hover,.dialog-header button:hover{background:#edf3f6}
+        .browser-dialog{position:absolute;z-index:30;inset:0;display:grid;place-items:center;padding:18px;background:rgba(25,39,51,.38)}
+        .dialog-card{width:min(510px,100%);max-height:min(640px,90%);display:flex;flex-direction:column;overflow:hidden;background:#fff;border:1px solid #dce4e9;border-radius:9px;box-shadow:0 16px 42px rgba(28,43,55,.24)}
+        .dialog-header{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:1px solid #e5ebef}
+        .dialog-header h2{margin:0;color:#344459;font-size:14px}
+        .dialog-content{padding:15px;overflow:auto;color:#344459;font-size:11px}
+        .theme-choices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+        .theme-choice{min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#5e7082;background:#f5f8fa;border:1px solid #e0e7ec;border-radius:6px;font-size:10px}
+        .theme-choice[aria-pressed="true"]{color:#246384;background:#e8f2f7;border-color:#94b6c8}
+        .dialog-content h3{margin:18px 0 8px;color:#344459;font-size:12px}
+        .shortcut-list{display:grid;grid-template-columns:1fr auto;gap:7px;margin:0}
+        .shortcut-list dt{color:#64758a}.shortcut-list dd{margin:0}
+        kbd{padding:2px 5px;color:#526477;background:#f0f3f5;border:1px solid #dce4e9;border-radius:4px;font:10px monospace}
+        .bookmark-manager{display:flex;flex-direction:column;gap:6px}
+        .bookmark-manager-row{display:flex;align-items:center;gap:7px;padding:6px;background:#f5f8fa;border:1px solid #e2e8ec;border-radius:5px}
+        .bookmark-manager-row input{min-width:0;flex:1;height:30px;padding:0 7px;color:#344459;border:1px solid #dce4e9;border-radius:4px;font-size:11px}
+        .bookmark-manager-row button{width:28px;height:28px;color:#627286;background:#fff;border:1px solid #dce4e9;border-radius:4px}
+        .bookmark-manager-row button:disabled{opacity:.4;cursor:default}
+        .bookmark-favicon{width:16px;height:16px;flex:0 0 auto;object-fit:contain}
+        .quick-link-favicon{width:23px;height:23px;object-fit:contain}
+        .dialog-empty{color:#7a8796}
+        #app[data-theme="dark"]{color-scheme:dark;background:#20242b;color:#e5e9ef}
+        #app[data-theme="dark"] .site-nav,#app[data-theme="dark"] .browser-app,#app[data-theme="dark"] .address-toolbar,#app[data-theme="dark"] .bookmark-bar{color:#e5e9ef;background:#292e37;border-color:#3e4651}
+        #app[data-theme="dark"] .tab-strip{background:#232831;border-color:#3e4651}
+        #app[data-theme="dark"] .browser-stage,#app[data-theme="dark"] .page-host,#app[data-theme="dark"] .tab-page,#app[data-theme="dark"] .home-view,#app[data-theme="dark"] .profile-view{background:#20242b}
+        #app[data-theme="dark"] .hub-center,#app[data-theme="dark"] .home-card h1,#app[data-theme="dark"] .profile-content{color:#e5e9ef}
+        #app[data-theme="dark"] .omnibox,#app[data-theme="dark"] .find-bar{background:#303640;border-color:#495360}
+        #app[data-theme="dark"] .omnibox input,#app[data-theme="dark"] .find-bar input{color:#edf2f7}
+        #app[data-theme="dark"] .browser-menu,#app[data-theme="dark"] .dialog-card,#app[data-theme="dark"] .history-view{color:#e5e9ef;background:#2c323b;border-color:#47515d}
+        #app[data-theme="dark"] .browser-menu button,#app[data-theme="dark"] .dialog-header h2,#app[data-theme="dark"] .dialog-content h3{color:#e5e9ef}
+        #app[data-theme="dark"] .theme-choice,#app[data-theme="dark"] .bookmark-manager-row{color:#e5e9ef;background:#333a44;border-color:#4a535f}
+        #app[data-theme="dark"] .theme-choice[aria-pressed="true"]{background:#244759;border-color:#4a8cac}
+        #app[data-theme="dark"] .bookmark-manager-row input{color:#e5e9ef;background:#252a32;border-color:#4a535f}
+        #app[data-theme="dark"] kbd{color:#dbe3eb;background:#3a424c;border-color:#505a67}
+        #app[data-theme="ocean"] .site-nav,#app[data-theme="ocean"] .address-toolbar,#app[data-theme="ocean"] .bookmark-bar{background:#e8f5fb}
+        #app[data-theme="ocean"] .home-view,#app[data-theme="ocean"] .browser-stage{background:#e5f3f8}
+        #app[data-theme="forest"] .site-nav,#app[data-theme="forest"] .address-toolbar,#app[data-theme="forest"] .bookmark-bar{background:#eef5ed}
+        #app[data-theme="forest"] .home-view,#app[data-theme="forest"] .browser-stage{background:#e9f1e7}
+        @media(prefers-color-scheme:dark){#app[data-theme="system"]{color-scheme:dark;background:#20242b;color:#e5e9ef}#app[data-theme="system"] .site-nav,#app[data-theme="system"] .browser-app,#app[data-theme="system"] .address-toolbar,#app[data-theme="system"] .bookmark-bar{color:#e5e9ef;background:#292e37;border-color:#3e4651}#app[data-theme="system"] .tab-strip{background:#232831;border-color:#3e4651}#app[data-theme="system"] .browser-stage,#app[data-theme="system"] .page-host,#app[data-theme="system"] .tab-page,#app[data-theme="system"] .home-view,#app[data-theme="system"] .profile-view{background:#20242b}#app[data-theme="system"] .browser-menu,#app[data-theme="system"] .dialog-card,#app[data-theme="system"] .history-view{color:#e5e9ef;background:#2c323b;border-color:#47515d}}
+        @media(max-width:560px){.find-bar{right:7px;left:7px}.find-bar input{min-width:0;flex:1}.theme-choices{grid-template-columns:repeat(3,minmax(0,1fr))}}
+      </style>
       <div class="shell">
         <section class="boot-screen" id="startup-screen" data-state="loading" role="status" aria-live="polite">
           <div class="boot-card">
@@ -80,6 +125,9 @@
               <button class="chrome-icon-button menu-toggle" id="menu-toggle" type="button" aria-label="Browser menu" aria-haspopup="menu" aria-expanded="false" title="Browser menu"><span data-icon="menu"></span></button>
               <div class="browser-menu" id="browser-menu" role="menu" hidden="hidden">
                 <button type="button" id="menu-new-tab">New tab <span>Ctrl+T</span></button>
+                <button type="button" id="menu-duplicate-tab">Duplicate tab</button>
+                <button type="button" id="menu-close-other-tabs">Close other tabs</button>
+                <button type="button" id="menu-mute-tab">Mute this tab</button>
                 <button type="button" id="menu-private-window">New private window</button>
                 <div class="menu-divider"></div>
                 <button type="button" id="menu-home">Home</button>
@@ -87,7 +135,10 @@
                 <div class="menu-divider"></div>
                 <button type="button" id="menu-history">History</button>
                 <button type="button" id="menu-restore-tab">Reopen closed tab</button>
+                <button type="button" id="menu-find-page">Find on page</button>
                 <button type="button" id="menu-bookmarks">Show bookmarks</button>
+                <button type="button" id="menu-manage-bookmarks">Manage bookmarks</button>
+                <button type="button" id="menu-toggle-bookmarks">Hide bookmarks bar</button>
                 <button type="button" id="menu-clear-data">Clear browsing data</button>
                 <div class="menu-divider"></div>
                 <div class="menu-zoom">
@@ -97,6 +148,7 @@
                   <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
                   <button type="button" id="zoom-reset" aria-label="Reset zoom">Reset</button>
                 </div>
+                <button type="button" id="menu-settings">Appearance &amp; shortcuts <span>Ctrl+,</span></button>
               </div>
             </div>
           </form>
@@ -104,10 +156,12 @@
           <p class="private-notice" id="private-notice" hidden="hidden">Private mode: Blueberry won’t save history or bookmarks.</p>
           <section class="browser-stage" id="browser-stage" aria-label="Browser content">
             <div class="page-host" id="page-host"></div>
+            <form class="find-bar" id="find-bar" hidden="hidden" role="search"><input id="find-input" type="search" placeholder="Find on page" aria-label="Find on page" /><button id="find-previous" type="button" aria-label="Previous match" title="Previous match">↑</button><button id="find-next" type="button" aria-label="Next match" title="Next match">↓</button><button id="find-close" type="button" aria-label="Close find" title="Close">×</button></form>
             <section class="history-view" id="history-view" aria-label="Browsing history" hidden="hidden">
               <header class="history-header"><h2>History</h2><div class="history-actions"><input id="history-search" type="search" placeholder="Search history" aria-label="Search history" /><button class="chrome-icon-button" id="clear-history-button" type="button" aria-label="Clear history"><span data-icon="trash"></span></button><button class="chrome-icon-button" id="close-history-button" type="button" aria-label="Close history"><span data-icon="close"></span></button></div></header>
               <p id="history-status" aria-live="polite"></p><div class="history-list" id="history-list"></div>
             </section>
+            <section class="browser-dialog" id="browser-dialog" hidden="hidden"><div class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="dialog-title"><header class="dialog-header"><h2 id="dialog-title"></h2><button id="dialog-close" type="button" aria-label="Close dialog">×</button></header><div class="dialog-content" id="dialog-content"></div></div></section>
           </section>
         </main>
         <main class="view profile-view" id="profile-view" hidden="hidden">
@@ -145,6 +199,13 @@
           fullscreen: '<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>',
           "fullscreen-exit": '<path d="M8 3v5H3m13-5v5h5M3 16h5v5m13-5h-5v5"/>',
           search: '<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/>',
+          find: '<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5M8 10.8h5.5"/>',
+          duplicate: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
+          volume: '<path d="M11 5 6 9H3v6h3l5 4V5ZM15 9a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/>',
+          "volume-muted": '<path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/>',
+          settings: '<path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.9l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 1.9Z"/>',
+          sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>',
+          moon: '<path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/>',
           play: '<path d="m9 6 10 6-10 6V6Z"/>',
           book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/>',
           game: '<path d="M7 8h10a4 4 0 0 1 3.8 5.2l-1 3.3a2 2 0 0 1-3.2 1l-2.1-1.7h-5l-2.1 1.7a2 2 0 0 1-3.2-1l-1-3.3A4 4 0 0 1 7 8Z"/><path d="M8 11v4m-2-2h4m6-1h.01M18 14h.01"/>',
@@ -154,6 +215,34 @@
         };
         const iconUri = (name) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#64758a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">${ICON_PATHS[name] || ICON_PATHS.globe}</svg>`)}`;
         const createHtmlElement = (name) => document.createElementNS("http://www.w3.org/1999/xhtml", name);
+        function faviconUrl(value) {
+          try {
+            const url = new URL(value);
+            if (!["http:", "https:"].includes(url.protocol)) return null;
+            return `https://icons.duckduckgo.com/ip3/${encodeURIComponent(url.hostname)}.ico`;
+          } catch {
+            return null;
+          }
+        }
+        function makeFavicon(value, className = "site-favicon") {
+          const image = createHtmlElement("img");
+          image.className = className;
+          setFavicon(image, value);
+          return image;
+        }
+        function setFavicon(image, value) {
+          const source = faviconUrl(value);
+          image.alt = "";
+          image.loading = "lazy";
+          image.decoding = "async";
+          image.referrerPolicy = "no-referrer";
+          image.setAttribute("aria-hidden", "true");
+          image.onerror = () => {
+            image.onerror = null;
+            image.src = iconUri("globe");
+          };
+          image.src = source || iconUri("globe");
+        }
         function makeIcon(name, className = "icon") {
           const image = createHtmlElement("img");
           image.className = className;
@@ -233,6 +322,10 @@
         const historyKey = "blueberryub.static-history";
         const recentlyClosedKey = "blueberryub.static-recently-closed";
         const zoomKey = "blueberryub.static-zoom";
+        const themeKey = "blueberryub.static-theme";
+        const bookmarksBarKey = "blueberryub.static-bookmarks-bar";
+        const validThemes = ["system", "light", "dark", "ocean", "forest"];
+        let theme = validThemes.includes(localStorage.getItem(themeKey)) ? localStorage.getItem(themeKey) : "system";
         const pageStatus = status;
         const addressInput = document.querySelector("#address-input");
         const tabList = document.querySelector("#tab-list");
@@ -244,6 +337,11 @@
         const browserMenu = document.querySelector("#browser-menu");
         const menuToggle = document.querySelector("#menu-toggle");
         const historyView = document.querySelector("#history-view");
+        const findBar = document.querySelector("#find-bar");
+        const findInput = document.querySelector("#find-input");
+        const browserDialog = document.querySelector("#browser-dialog");
+        const dialogTitle = document.querySelector("#dialog-title");
+        const dialogContent = document.querySelector("#dialog-content");
         const historyList = document.querySelector("#history-list");
         const historyStatus = document.querySelector("#history-status");
         const historySearch = document.querySelector("#history-search");
@@ -257,6 +355,137 @@
         let controllerPromise;
         let recentlyClosedTabs = readSessionValue(recentlyClosedKey, []);
         let zoomLevel = readZoom();
+        let bookmarksBarVisible = localStorage.getItem(bookmarksBarKey) !== "false";
+        document.querySelector("#app").dataset.theme = theme;
+
+        function setTheme(value) {
+          if (!validThemes.includes(value)) return;
+          theme = value;
+          document.querySelector("#app").dataset.theme = theme;
+          try {
+            localStorage.setItem(themeKey, theme);
+          } catch (error) {
+            showStatus("Could not save theme preference: " + error.message);
+          }
+          dialogContent.querySelectorAll("[data-theme-choice]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.themeChoice === theme)));
+        }
+        function openSettingsDialog() {
+          browserMenu.hidden = true;
+          menuToggle.setAttribute("aria-expanded", "false");
+          dialogTitle.textContent = "Appearance & keyboard shortcuts";
+          dialogContent.replaceChildren();
+          const themes = createHtmlElement("div");
+          themes.className = "theme-choices";
+          for (const [value, label, icon] of [["system", "System", "settings"], ["light", "Light", "sun"], ["dark", "Dark", "moon"], ["ocean", "Ocean", "globe"], ["forest", "Forest", "home"]]) {
+            const button = createHtmlElement("button");
+            button.className = "theme-choice";
+            button.type = "button";
+            button.dataset.themeChoice = value;
+            button.setAttribute("aria-pressed", String(theme === value));
+            button.append(makeIcon(icon));
+            const text = createHtmlElement("span");
+            text.textContent = label;
+            button.append(text);
+            button.addEventListener("click", () => setTheme(value));
+            themes.append(button);
+          }
+          const title = createHtmlElement("h3");
+          title.textContent = "Keyboard shortcuts";
+          const shortcuts = [
+            ["Focus address bar", "Ctrl/Cmd + L"],
+            ["New tab", "Ctrl/Cmd + T"],
+            ["Close tab", "Ctrl/Cmd + W"],
+            ["Restore closed tab", "Ctrl/Cmd + Shift + T"],
+            ["Duplicate tab", "Ctrl/Cmd + Shift + D"],
+            ["Find in page", "Ctrl/Cmd + F"],
+            ["Bookmark page", "Ctrl/Cmd + D"],
+            ["Settings", "Ctrl/Cmd + ,"],
+            ["Switch tabs", "Ctrl/Cmd + 1–8"],
+            ["Switch to last tab", "Ctrl/Cmd + 9"],
+            ["Cycle tabs", "Ctrl/Cmd + Page Up/Down"],
+            ["Back / forward", "Alt + ← / →"],
+            ["Fullscreen", "F11"]
+          ];
+          const list = createHtmlElement("dl");
+          list.className = "shortcut-list";
+          for (const [action, keys] of shortcuts) {
+            const description = createHtmlElement("dt");
+            description.textContent = action;
+            const binding = createHtmlElement("dd");
+            const key = createHtmlElement("kbd");
+            key.textContent = keys;
+            binding.append(key);
+            list.append(description, binding);
+          }
+          const proxy = createHtmlElement("p");
+          proxy.className = "dialog-empty";
+          proxy.textContent = "Proxy routes are checked live. Your fastest recent route is tried first, with fallback routes on failure.";
+          dialogContent.append(themes, title, list, proxy);
+          browserDialog.hidden = false;
+          document.querySelector("#dialog-close").focus();
+        }
+        function openBookmarksManager() {
+          browserMenu.hidden = true;
+          menuToggle.setAttribute("aria-expanded", "false");
+          dialogTitle.textContent = "Manage bookmarks";
+          dialogContent.replaceChildren();
+          const list = createHtmlElement("div");
+          list.className = "bookmark-manager";
+          if (!bookmarks.length) {
+            const empty = createHtmlElement("p");
+            empty.className = "dialog-empty";
+            empty.textContent = "No bookmarks saved yet. Use the star in the address bar to save a page.";
+            list.append(empty);
+          }
+          bookmarks.forEach((item, index) => {
+            const row = createHtmlElement("div");
+            row.className = "bookmark-manager-row";
+            row.append(makeFavicon(item.url, "bookmark-favicon"));
+            const title = createHtmlElement("input");
+            title.value = item.title;
+            title.setAttribute("aria-label", `Bookmark title for ${item.url}`);
+            title.addEventListener("change", () => {
+              bookmarks[index].title = title.value.trim() || tabName(item.url);
+              saveBookmarks();
+              title.value = bookmarks[index].title;
+            });
+            row.append(title);
+            for (const [label, delta] of [["Move bookmark up", -1], ["Move bookmark down", 1]]) {
+              const move = createHtmlElement("button");
+              move.type = "button";
+              move.textContent = delta < 0 ? "↑" : "↓";
+              move.title = label;
+              move.setAttribute("aria-label", label);
+              move.disabled = index + delta < 0 || index + delta >= bookmarks.length;
+              move.addEventListener("click", () => {
+                const [entry] = bookmarks.splice(index, 1);
+                bookmarks.splice(index + delta, 0, entry);
+                saveBookmarks();
+                openBookmarksManager();
+              });
+              row.append(move);
+            }
+            const remove = createHtmlElement("button");
+            remove.type = "button";
+            remove.textContent = "×";
+            remove.title = "Remove bookmark";
+            remove.setAttribute("aria-label", `Remove bookmark ${item.title}`);
+            remove.addEventListener("click", () => {
+              bookmarks.splice(index, 1);
+              saveBookmarks();
+              openBookmarksManager();
+            });
+            row.append(remove);
+            list.append(row);
+          });
+          dialogContent.append(list);
+          browserDialog.hidden = false;
+          document.querySelector("#dialog-close").focus();
+        }
+        function closeBrowserDialog() {
+          browserDialog.hidden = true;
+          menuToggle.focus();
+        }
 
         function readBookmarks() {
           try {
@@ -347,12 +576,18 @@
             button.className = "bookmark-link";
             button.type = "button";
             button.title = item.url;
-            button.append(makeIcon("globe"));
+            button.append(makeFavicon(item.url, "bookmark-favicon"));
             const title = createHtmlElement("span");
             title.textContent = item.title;
             button.append(title);
             button.addEventListener("click", () => navigate(item.url));
             bookmarkBar.append(button);
+          }
+          bookmarkBar.hidden = !bookmarksBarVisible;
+          const toggle = document.querySelector("#menu-toggle-bookmarks");
+          if (toggle) toggle.textContent = bookmarksBarVisible ? "Hide bookmarks bar" : "Show bookmarks bar";
+          for (const tab of tabs) {
+            if (!tab.url && tab.startPage) renderQuickLinks(tab.startPage.querySelector(".quick-links"));
           }
         }
         function renderHistory() {
@@ -415,6 +650,41 @@
           { label: "Wikipedia", url: "https://www.wikipedia.org", icon: "book", color: "mint" },
           { label: "CrazyGames", url: "https://www.crazygames.com", icon: "game", color: "violet" }
         ];
+        function getQuickLinks() {
+          const saved = bookmarks.map((item) => ({ label: item.title || tabName(item.url), url: item.url, color: "sky" }));
+          const seen = new Set();
+          return [...saved, ...quickLinks].filter((item) => {
+            if (seen.has(item.url)) return false;
+            seen.add(item.url);
+            return true;
+          }).slice(0, 8);
+        }
+        function renderQuickLinks(container) {
+          if (!container) return;
+          container.replaceChildren();
+          for (const item of getQuickLinks()) {
+            const button = createHtmlElement("button");
+            button.className = "quick-link";
+            button.type = "button";
+            button.dataset.url = item.url;
+            const mark = createHtmlElement("span");
+            mark.className = `quick-link-mark ${item.color}`;
+            if (item.local) {
+              const logoImage = createHtmlElement("img");
+              logoImage.className = "quick-link-favicon";
+              logoImage.src = LOGO;
+              logoImage.alt = "";
+              mark.append(logoImage);
+            } else {
+              mark.append(makeFavicon(item.url, "quick-link-favicon"));
+            }
+            const label = createHtmlElement("span");
+            label.textContent = item.label;
+            button.append(mark, label);
+            button.addEventListener("click", () => item.local ? showView("home") : navigate(item.url));
+            container.append(button);
+          }
+        }
         function makeStartPage() {
           const start = createHtmlElement("div");
           start.className = "start-page";
@@ -431,31 +701,7 @@
           const links = createHtmlElement("div");
           links.className = "quick-links";
           links.setAttribute("aria-label", "Quick links");
-          for (const item of quickLinks) {
-            const button = createHtmlElement("button");
-            button.className = "quick-link";
-            button.type = "button";
-            button.dataset.url = item.url;
-            const mark = createHtmlElement("span");
-            mark.className = `quick-link-mark ${item.color}`;
-            if (item.local) {
-              const logoImage = createHtmlElement("img");
-              logoImage.className = "quick-link-favicon";
-              logoImage.src = LOGO;
-              logoImage.alt = "";
-              mark.append(logoImage);
-            } else {
-              mark.append(makeIcon(item.icon, "quick-link-fallback icon"));
-            }
-            const label = createHtmlElement("span");
-            label.textContent = item.label;
-            button.append(mark, label);
-            button.addEventListener("click", () => {
-              if (item.local) showView("home");
-              else navigate(item.url);
-            });
-            links.append(button);
-          }
+          renderQuickLinks(links);
           start.append(identity, links);
           return start;
         }
@@ -470,6 +716,7 @@
           tab.name = tabName(tab.url);
           tab.title.textContent = tab.name;
           tab.button.title = tab.url;
+          setFavicon(tab.favicon, tab.url);
           recordVisit(tab, tab.url);
           if (tab === activeTab) {
             addressInput.value = tab.url;
@@ -483,6 +730,8 @@
             const pageDocument = pageWindow?.document;
             if (!pageWindow || !pageDocument || tab.popupDocuments.has(pageDocument)) return;
             tab.popupDocuments.add(pageDocument);
+            pageWindow.addEventListener("keydown", handleBrowserShortcut, true);
+            if (tab.muted) applyTabMute(tab);
             const blockOpen = () => { showStatus("Blocked a site popup"); return null; };
             try {
               Object.defineProperty(pageWindow, "open", { configurable: true, writable: true, value: blockOpen });
@@ -509,6 +758,71 @@
           } catch {
             showStatus("Popup protection unavailable on this page");
           }
+        }
+        function applyTabMute(tab) {
+          try {
+            const pageWindow = tab.iframe.contentWindow;
+            const pageDocument = pageWindow?.document;
+            if (!pageWindow || !pageDocument) return false;
+            pageDocument.querySelectorAll("audio,video").forEach((media) => { media.muted = tab.muted; });
+            if (!tab.muted) {
+              tab.mediaObserver?.disconnect();
+              tab.mediaObserver = null;
+              return true;
+            }
+            if (!tab.mediaObserver) {
+              tab.mediaObserver = new pageWindow.MutationObserver((records) => {
+                for (const node of records.flatMap((record) => [...record.addedNodes])) {
+                  if (node instanceof pageWindow.HTMLMediaElement) node.muted = tab.muted;
+                  node.querySelectorAll?.("audio,video").forEach((media) => { media.muted = tab.muted; });
+                }
+              });
+              tab.mediaObserver.observe(pageDocument.documentElement, { childList: true, subtree: true });
+            }
+            return true;
+          } catch {
+            return false;
+          }
+        }
+        function toggleTabMute(tab = activeTab) {
+          if (!tab) return;
+          tab.muted = !tab.muted;
+          if (!applyTabMute(tab) && tab.iframe && !tab.iframe.hidden) {
+            tab.muted = !tab.muted;
+            showStatus("This page does not allow tab audio controls");
+            return;
+          }
+          document.querySelector("#menu-mute-tab").textContent = tab.muted ? "Unmute this tab" : "Mute this tab";
+          showStatus(tab.muted ? "Tab muted" : "Tab unmuted");
+        }
+        function openFindBar() {
+          showView("browser");
+          findBar.hidden = false;
+          findInput.focus();
+          findInput.select();
+        }
+        function findInPage(backwards = false) {
+          const query = findInput.value;
+          const pageWindow = activeTab?.iframe?.contentWindow;
+          if (!query || !pageWindow || typeof pageWindow.find !== "function") {
+            showStatus(query ? "Find is unavailable on this page" : "Enter text to find");
+            return;
+          }
+          try {
+            if (!pageWindow.find(query, false, backwards, true, false, false, false)) showStatus("No more matches");
+          } catch (error) {
+            showStatus("Could not search this page: " + error.message);
+          }
+        }
+        function duplicateActiveTab() {
+          const url = activeTab?.url;
+          const tab = createTab();
+          if (url) navigate(url, tab);
+          else showView("browser");
+        }
+        function closeOtherTabs() {
+          if (!activeTab) return;
+          for (const tab of [...tabs]) if (tab !== activeTab) closeTab(tab);
         }
         function updateBookmarkButton() {
           const saved = Boolean(activeTab?.url && bookmarks.some((item) => item.url === activeTab.url));
@@ -537,6 +851,7 @@
           backButton.disabled = !tab.frame;
           forwardButton.disabled = !tab.frame;
           reloadButton.disabled = !tab.frame;
+          document.querySelector("#menu-mute-tab").textContent = tab.muted ? "Unmute this tab" : "Mute this tab";
           updateBookmarkButton();
         }
         function createTab() {
@@ -556,7 +871,7 @@
           title.className = "tab-title";
           title.textContent = "New tab";
           button.append(favicon, title);
-          const tab = { id, url: "", name: "New tab", entry, button, title, favicon, page: null, startPage: null, loading: null, error: null, iframe: null, frame: null, framePromise: null, popupDocuments: new WeakSet(), lastHistoryUrl: "", lastHistoryAt: 0 };
+          const tab = { id, url: "", name: "New tab", entry, button, title, favicon, page: null, startPage: null, loading: null, error: null, iframe: null, frame: null, framePromise: null, popupDocuments: new WeakSet(), mediaObserver: null, muted: false, lastHistoryUrl: "", lastHistoryAt: 0 };
           button.addEventListener("click", () => activateTab(tab));
           const close = createHtmlElement("button");
           close.className = "tab-close";
@@ -596,7 +911,11 @@
           tab.iframe.allow = "fullscreen; autoplay; clipboard-read; clipboard-write";
           tab.iframe.referrerPolicy = "no-referrer";
           tab.iframe.hidden = true;
-          tab.iframe.addEventListener("load", () => installPopupGuard(tab));
+          tab.iframe.addEventListener("load", () => {
+            tab.mediaObserver?.disconnect();
+            tab.mediaObserver = null;
+            installPopupGuard(tab);
+          });
           page.append(tab.startPage, tab.loading, tab.error, tab.iframe);
           pageHost.append(page);
           tabs.push(tab);
@@ -605,6 +924,7 @@
           return tab;
         }
         function disposeTab(tab) {
+          tab.mediaObserver?.disconnect();
           if (tab.frame) {
             const frames = tab.frame.controller?.frames;
             const index = frames?.indexOf(tab.frame) ?? -1;
@@ -655,7 +975,7 @@
           });
           return serviceWorkerPromise;
         }
-        function probeWisp(url) {
+        function probeWisp(url, timeoutMs = 5000) {
           return new Promise((resolve) => {
             let socket;
             let settled = false;
@@ -667,7 +987,7 @@
               if (socket && socket.readyState < WebSocket.CLOSING) socket.close();
               resolve(reachable ? { url, latencyMs: Math.round(performance.now() - startedAt) } : null);
             };
-            const timer = setTimeout(() => finish(false), 5000);
+            const timer = setTimeout(() => finish(false), timeoutMs);
             try {
               socket = new WebSocket(url);
               socket.addEventListener("open", () => finish(true), { once: true });
@@ -680,25 +1000,59 @@
           });
         }
         const wispHealthKey = "blueberryub.static-wisp-health";
-        function saveWispResults(results) {
+        function readWispHealth() {
           try {
+            const cached = JSON.parse(localStorage.getItem(wispHealthKey) || "null");
+            if (!cached || !Number.isFinite(cached.checkedAt) || !Array.isArray(cached.endpoints)) return null;
+            const endpoints = cached.endpoints.filter((item) => {
+              const checkedAt = Number.isFinite(item?.checkedAt) ? item.checkedAt : cached.checkedAt;
+              return WISP_URLS.includes(item?.url) && Number.isFinite(item.latencyMs) && item.latencyMs >= 0 && Date.now() - checkedAt < 6 * 60 * 60 * 1000;
+            });
+            return { checkedAt: cached.checkedAt, endpoints };
+          } catch (error) {
+            console.warn("Could not read saved WISP timings:", error);
+            return null;
+          }
+        }
+        function saveWispResults(results, previous = []) {
+          try {
+            const endpoints = new Map(previous.map((item) => [item.url, item]));
+            for (const result of results.filter(Boolean)) endpoints.set(result.url, { ...result, checkedAt: Date.now() });
             localStorage.setItem(wispHealthKey, JSON.stringify({
               checkedAt: Date.now(),
-              endpoints: results.filter(Boolean).sort((a, b) => a.latencyMs - b.latencyMs)
+              endpoints: [...endpoints.values()].sort((a, b) => a.latencyMs - b.latencyMs)
             }));
           } catch (error) {
             console.warn("Could not save WISP connection timings:", error);
           }
         }
         async function findWisp() {
-          setStartup(`Checking ${WISP_URLS.length} proxy routes…`, "loading", 0.2);
+          const cached = readWispHealth();
+          const preferred = cached?.endpoints[0] || null;
+          if (preferred) {
+            setStartup("Reconnecting to your fastest saved proxy route…", "loading", 0.22);
+            const result = await probeWisp(preferred.url, 1400);
+            if (result) {
+              const remaining = WISP_URLS.filter((url) => url !== result.url);
+              let completed = 0;
+              Promise.all(remaining.map((url) => probeWisp(url).then((candidate) => {
+                completed += 1;
+                setStartup(`Refreshing route timings (${completed}/${remaining.length})…`, "loading", 0.25 + completed / remaining.length * 0.3);
+                return candidate;
+              }))).then((results) => saveWispResults([result, ...results], cached.endpoints)).catch((error) => console.warn("Could not refresh WISP timings:", error));
+              return result.url;
+            }
+          }
+          const candidates = WISP_URLS.filter((url) => url !== preferred?.url);
+          if (!candidates.length) throw new Error("No proxy server reachable");
+          setStartup(`Checking ${candidates.length} proxy routes…`, "loading", 0.2);
           let completed = 0;
-          const probes = WISP_URLS.map((url) => probeWisp(url).then((result) => {
+          const probes = candidates.map((url) => probeWisp(url).then((result) => {
             completed += 1;
-            setStartup(`Checking proxy routes (${completed}/${WISP_URLS.length})…`, "loading", 0.2 + completed / WISP_URLS.length * 0.4);
+            setStartup(`Checking proxy routes (${completed}/${candidates.length})…`, "loading", 0.2 + completed / candidates.length * 0.4);
             return result;
           }));
-          Promise.all(probes).then(saveWispResults);
+          Promise.all(probes).then((results) => saveWispResults(results)).catch((error) => console.warn("Could not save WISP timings:", error));
           try {
             const fastest = await Promise.any(probes.map((probe) => probe.then((result) => {
               if (!result) throw new Error("WISP endpoint unavailable");
@@ -796,7 +1150,7 @@
           tab.name = tabName(url);
           tab.title.textContent = tab.name;
           tab.button.title = url;
-          tab.favicon.src = LOGO;
+          setFavicon(tab.favicon, url);
           setTabView(tab, "loading");
           pageStatus.textContent = "Connecting";
           try {
@@ -886,6 +1240,9 @@
           menuToggle.setAttribute("aria-expanded", String(!browserMenu.hidden));
         });
         document.querySelector("#menu-new-tab").addEventListener("click", () => { browserMenu.hidden = true; createTab(); });
+        document.querySelector("#menu-duplicate-tab").addEventListener("click", duplicateActiveTab);
+        document.querySelector("#menu-close-other-tabs").addEventListener("click", closeOtherTabs);
+        document.querySelector("#menu-mute-tab").addEventListener("click", toggleTabMute);
         document.querySelector("#menu-private-window").addEventListener("click", () => {
           browserMenu.hidden = true;
           if (!privateMode) togglePrivateMode();
@@ -895,6 +1252,19 @@
         document.querySelector("#menu-home").addEventListener("click", () => { browserMenu.hidden = true; showView("home"); });
         document.querySelector("#menu-profile").addEventListener("click", () => { browserMenu.hidden = true; showView("profile"); });
         document.querySelector("#menu-history").addEventListener("click", showHistory);
+        document.querySelector("#menu-find-page").addEventListener("click", openFindBar);
+        document.querySelector("#menu-manage-bookmarks").addEventListener("click", openBookmarksManager);
+        document.querySelector("#menu-toggle-bookmarks").addEventListener("click", () => {
+          bookmarksBarVisible = !bookmarksBarVisible;
+          bookmarkBar.hidden = !bookmarksBarVisible;
+          document.querySelector("#menu-toggle-bookmarks").textContent = bookmarksBarVisible ? "Hide bookmarks bar" : "Show bookmarks bar";
+          try {
+            localStorage.setItem(bookmarksBarKey, String(bookmarksBarVisible));
+          } catch (error) {
+            showStatus("Could not save bookmarks bar preference: " + error.message);
+          }
+        });
+        document.querySelector("#menu-settings").addEventListener("click", openSettingsDialog);
         document.querySelector("#menu-restore-tab").addEventListener("click", () => {
           browserMenu.hidden = true;
           restoreClosedTab();
@@ -916,6 +1286,17 @@
         });
         document.querySelector("#close-history-button").addEventListener("click", () => { historyView.hidden = true; });
         historySearch.addEventListener("input", renderHistory);
+        document.querySelector("#dialog-close").addEventListener("click", closeBrowserDialog);
+        browserDialog.addEventListener("click", (event) => {
+          if (event.target === browserDialog) closeBrowserDialog();
+        });
+        document.querySelector("#find-previous").addEventListener("click", () => findInPage(true));
+        document.querySelector("#find-next").addEventListener("click", () => findInPage(false));
+        document.querySelector("#find-close").addEventListener("click", () => { findBar.hidden = true; });
+        findBar.addEventListener("submit", (event) => {
+          event.preventDefault();
+          findInPage(false);
+        });
         document.querySelector("#fullscreen-button").addEventListener("click", async () => {
           const button = document.querySelector("#fullscreen-button");
           try {
@@ -936,17 +1317,46 @@
             menuToggle.setAttribute("aria-expanded", "false");
           }
         });
-        document.addEventListener("keydown", (event) => {
+        function handleBrowserShortcut(event) {
           const modifier = event.ctrlKey || event.metaKey;
-          if (modifier && event.key.toLowerCase() === "l") { event.preventDefault(); showView("browser"); addressInput.focus(); addressInput.select(); }
-          else if (modifier && event.key.toLowerCase() === "t") { event.preventDefault(); showView("browser"); createTab(); }
-          else if (modifier && event.key.toLowerCase() === "w") { event.preventDefault(); if (activeTab) closeTab(activeTab); }
-          else if (modifier && event.key.toLowerCase() === "r") { event.preventDefault(); activeTab?.frame?.reload(); }
+          const key = event.key.toLowerCase();
+          if (modifier && key === "l") { event.preventDefault(); showView("browser"); addressInput.focus(); addressInput.select(); }
+          else if (modifier && event.shiftKey && key === "t") { event.preventDefault(); showView("browser"); restoreClosedTab(); }
+          else if (modifier && event.shiftKey && key === "d") { event.preventDefault(); showView("browser"); duplicateActiveTab(); }
+          else if (modifier && event.shiftKey && key === "b") { event.preventDefault(); document.querySelector("#menu-toggle-bookmarks").click(); }
+          else if (modifier && event.shiftKey && key === "n") { event.preventDefault(); document.querySelector("#menu-private-window").click(); }
+          else if (modifier && key === "t") { event.preventDefault(); showView("browser"); createTab(); }
+          else if (modifier && key === "w") { event.preventDefault(); if (activeTab) closeTab(activeTab); }
+          else if (modifier && key === "r") { event.preventDefault(); activeTab?.frame?.reload(); }
+          else if (modifier && key === "f") { event.preventDefault(); openFindBar(); }
+          else if (modifier && key === "d") { event.preventDefault(); toggleBookmark(); }
+          else if (modifier && key === ",") { event.preventDefault(); showView("browser"); openSettingsDialog(); }
+          else if (modifier && (event.key === "PageUp" || event.key === "PageDown")) {
+            event.preventDefault();
+            if (tabs.length) activateTab(tabs[(tabs.indexOf(activeTab) + (event.key === "PageUp" ? tabs.length - 1 : 1)) % tabs.length]);
+          }
+          else if (modifier && /^[1-9]$/.test(event.key) && tabs.length) {
+            const tab = tabs[event.key === "9" ? tabs.length - 1 : Number(event.key) - 1];
+            if (tab) {
+              event.preventDefault();
+              showView("browser");
+              activateTab(tab);
+            }
+          }
           else if (event.altKey && event.key === "ArrowLeft") { event.preventDefault(); activeTab?.frame?.back(); }
           else if (event.altKey && event.key === "ArrowRight") { event.preventDefault(); activeTab?.frame?.forward(); }
           else if (event.key === "F11") { event.preventDefault(); document.querySelector("#fullscreen-button").click(); }
-          else if (event.key === "Escape" && !historyView.hidden) historyView.hidden = true;
-        });
+          else if (event.key === "Escape") {
+            if (!browserDialog.hidden) closeBrowserDialog();
+            else if (!findBar.hidden) findBar.hidden = true;
+            else if (!historyView.hidden) historyView.hidden = true;
+            else if (!browserMenu.hidden) {
+              browserMenu.hidden = true;
+              menuToggle.setAttribute("aria-expanded", "false");
+            }
+          }
+        }
+        document.addEventListener("keydown", handleBrowserShortcut);
         renderBookmarks();
         applyPrivateMode();
         createTab();

@@ -13,4 +13,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Purge the static app URL
-        run: curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 2 "https://purge.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg"
+        run: |
+          python3 - <<'PY'
+          import json
+          import time
+          import urllib.request
+
+          purge_url = "https://purge.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg"
+          path = "/gh/debugfr/blueberry@main/static/index.svg"
+
+          for attempt in range(10):
+              request = urllib.request.Request(purge_url, headers={"User-Agent": "BlueberryUB cache purge"})
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  result = json.load(response)
+
+              if result.get("status") == "finished":
+                  path_result = result.get("paths", {}).get(path)
+                  if path_result is None:
+                      raise RuntimeError(f"jsDelivr did not return a result for {path}: {result}")
+                  if not path_result.get("throttled", False):
+                      print(f"Purged {path}")
+                      break
+                  delay = int(path_result.get("throttlingReset", 60)) + 2
+                  print(f"jsDelivr throttled this purge; retrying in {delay}s")
+              else:
+                  delay = min(60, 2 ** attempt)
+                  print(f"Purge status is {result.get('status')!r}; retrying in {delay}s")
+
+              if attempt == 9:
+                  raise RuntimeError(f"jsDelivr purge did not complete successfully: {result}")
+              time.sleep(delay)
+          PY

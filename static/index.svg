@@ -169,6 +169,7 @@
         function showView(name) {
           for (const [view, section] of Object.entries(sections)) section.hidden = view !== name;
           document.querySelectorAll(".site-nav [data-view]").forEach((button) => button.classList.toggle("is-active", button.dataset.view === name));
+          if (name === "browser") getController().catch((error) => showStatus(error.message || "Proxy initialization failed"));
         }
         document.querySelectorAll("[data-view]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
         document.querySelectorAll("[data-open-browser]").forEach((button) => button.addEventListener("click", () => showView("browser")));
@@ -650,14 +651,16 @@
         }
         async function findWisp() {
           const probes = WISP_URLS.map(probeWisp);
-          for (const probe of probes) {
-            const url = await probe.result;
-            if (url) {
-              probes.forEach((other) => other.cancel());
+          try {
+            const wisp = await Promise.any(probes.map(({ result }) => result.then((url) => {
+              if (!url) throw new Error("WISP endpoint unavailable");
               return url;
-            }
+            })));
+            probes.forEach((probe) => probe.cancel());
+            return wisp;
+          } catch {
+            throw new Error("No proxy server reachable");
           }
-          throw new Error("No proxy server reachable");
         }
         async function initBootstrap() {
           const registration = await serviceWorkerPromise;
@@ -666,11 +669,14 @@
           const file = (path) => new URL(path, scope).href;
           const worker = registration.active || navigator.serviceWorker.controller;
           if (!worker) throw new Error("No active service worker found in registration.");
-          const wisp = await findWisp();
+          const wispPromise = findWisp();
           await loadScript(file("scram/scramjet.js"));
-          await loadScript(file("controller/controller.api.js"));
-          await loadScript(file("scram/scramjet-utils.js"));
-          await loadScript(file("clients/libcurl-client.js"));
+          await Promise.all([
+            loadScript(file("controller/controller.api.js")),
+            loadScript(file("scram/scramjet-utils.js")),
+            loadScript(file("clients/libcurl-client.js"))
+          ]);
+          const wisp = await wispPromise;
           const { Controller, config } = window.$scramjetController;
           config.prefix = new URL("~/sj/", scope).pathname;
           config.injectPath = file("controller/controller.inject.js");

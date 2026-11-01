@@ -24,6 +24,44 @@
         .quick-link-mark .quick-link-favicon{width:23px;height:23px;display:block;margin:auto;object-fit:contain}
         .bookmark-favicon{width:14px;height:14px;display:block;margin:auto;object-fit:contain}
       </style>
+      <style>
+        .start-page{background:#fff;background-size:auto}
+        .settings-backdrop{position:fixed;z-index:90;inset:0;display:grid;place-items:center;padding:18px;background:rgba(27,42,55,.38);backdrop-filter:blur(7px)}
+        .settings-window{width:min(720px,100%);height:min(480px,calc(100vh - 36px));display:grid;grid-template-columns:176px minmax(0,1fr);overflow:hidden;background:#fff;border:1px solid #dce5eb;border-radius:12px;box-shadow:0 22px 65px rgba(30,46,60,.24)}
+        .settings-sidebar{display:flex;flex-direction:column;gap:6px;padding:20px 12px;background:#f4f7f9;border-right:1px solid #e3e9ed}
+        .settings-sidebar h2{margin:0 0 16px 8px;color:#344459;font-size:15px}
+        .settings-nav{min-height:38px;display:flex;align-items:center;gap:9px;padding:0 10px;color:#637487;background:transparent;border:0;border-radius:6px;text-align:left;font-size:11px}
+        .settings-nav:hover,.settings-nav.is-active{color:#246384;background:#e4edf2}
+        .soon-bottom:hover:not(:disabled){transform:translate(-50%,-3px)}
+        .settings-nav .icon{width:16px;height:16px}
+        .settings-main{min-width:0;display:flex;flex-direction:column}
+        .settings-header{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid #e7ecef}
+        .settings-header h3{margin:0;color:#2d4053;font-size:16px}
+        .settings-header p{margin:4px 0 0;color:#84919e;font-size:10px}
+        .settings-close{width:32px;height:32px;display:grid;place-items:center;color:#718091;background:transparent;border:0;border-radius:5px}
+        .settings-close:hover{color:#2d4658;background:#edf2f5}
+        .settings-body{min-height:0;flex:1;overflow:auto;padding:20px}
+        .settings-panel h4{margin:0 0 6px;color:#34485b;font-size:12px}
+        .settings-help{margin:0 0 18px;color:#84919e;font-size:10px;line-height:1.55}
+        .setting-field{display:grid;gap:8px;margin-bottom:20px;color:#40546a;font-size:11px;font-weight:700}
+        .setting-field select{width:100%;height:38px;padding:0 10px;color:#344459;background:#f7f9fa;border:1px solid #dce5eb;border-radius:6px;font-size:11px}
+        .transport-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+        .transport-choice{min-height:70px;display:grid;grid-template-columns:16px 1fr;align-content:center;gap:4px 8px;padding:10px;color:#40546a;background:#f7f9fa;border:1px solid #e1e8ed;border-radius:7px;cursor:pointer}
+        .transport-choice:has(input:checked){background:#f0f7fa;border-color:#8fb4c5}
+        .transport-choice input{grid-row:span 2;margin:2px 0 0;accent-color:#347ca4}
+        .transport-choice strong{font-size:11px}
+        .transport-choice span{color:#8794a1;font-size:9px;line-height:1.4}
+        .transport-choice:has(input:disabled){opacity:.5;cursor:not-allowed}
+        .settings-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px}
+        .settings-footer p{margin:0;color:#8794a1;font-size:9px}
+        .settings-apply{min-height:34px;padding:0 13px;color:#fff;background:#367b9b;border:0;border-radius:5px;font-size:10px;font-weight:700}
+        .settings-apply:hover{background:#286687}
+        .credits-list{display:grid;gap:0;border:1px solid #e4eaee;border-radius:7px;overflow:hidden}
+        .credits-row{min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 13px;color:#40546a;background:#fff;border-bottom:1px solid #e9eef1;font-size:11px}
+        .credits-row:last-child{border-bottom:0}
+        .credits-row span:last-child{color:#7d8b98;text-align:right}
+        @media(max-width:560px){.settings-backdrop{padding:10px}.settings-window{height:min(560px,calc(100vh - 20px));grid-template-columns:112px minmax(0,1fr)}.settings-sidebar{padding:16px 7px}.settings-sidebar h2{margin-left:7px;font-size:13px}.settings-nav{gap:6px;padding:0 7px;font-size:10px}.settings-header{min-height:68px;padding:12px}.settings-body{padding:14px}.transport-choices{grid-template-columns:1fr}.settings-footer{align-items:flex-start;flex-direction:column}}
+      </style>
       <div class="shell">
         <section class="boot-screen" id="startup-screen" data-state="loading" role="status" aria-live="polite">
           <div class="boot-card">
@@ -45,7 +83,7 @@
             <svg class="hub-outline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true"><circle class="outer-ring" cx="320" cy="320" r="286" /><circle class="inner-ring" cx="320" cy="320" r="210" /></svg>
             <button class="menu-option browser-option" type="button" data-open-browser="true"><svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"><rect x="4.5" y="6" width="23" height="17" rx="2"/><path d="M11 27h10m-5-4v4M9 10h14"/></svg><span>Browser</span></button>
             <button class="menu-option soon-option soon-left" type="button" disabled="disabled" aria-label="Soon"><svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 24 24 5l3 3L8 27H5v-3Z"/><path d="m20 9 3 3M7 23l3 3"/></svg><span>Soon</span></button>
-            <button class="menu-option soon-option soon-bottom" type="button" disabled="disabled" aria-label="Soon"><svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"><path d="m16 3 2 2.5 3.2-.5.9 3 3 1.2-.7 3.2L27 16l-2.5 2 .5 3.2-3 .9-1.2 3-3.2-.7L16 27l-2-2.5-3.2.5-.9-3-3-1.2.7-3.2L5 16l2.5-2-.5-3.2 3-.9 1.2-3 3.2.7L16 3Z"/><circle cx="16" cy="16" r="4"/></svg><span>Soon</span></button>
+            <button class="menu-option soon-bottom" id="settings-button" type="button" aria-label="Settings"><svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"><path d="m16 3 2 2.5 3.2-.5.9 3 3 1.2-.7 3.2L27 16l-2.5 2 .5 3.2-3 .9-1.2 3-3.2-.7L16 27l-2-2.5-3.2.5-.9-3-3-1.2.7-3.2L5 16l2.5-2-.5-3.2 3-.9 1.2-3 3.2.7L16 3Z"/><circle cx="16" cy="16" r="4"/></svg><span>Settings</span></button>
             <div class="hub-center"><div class="logo-frame"><img id="hub-logo" alt="BlueberryUB logo" /></div><span class="version-label">Version 0.0.1</span><span class="creator-credit">A website created by Christian Hall.</span></div>
           </section>
           <section class="home-card" aria-label="BlueberryUB menu">
@@ -104,6 +142,46 @@
             </section>
           </section>
         </main>
+        <section class="settings-backdrop" id="settings-dialog" hidden="hidden">
+          <div class="settings-window" role="dialog" aria-modal="true" aria-labelledby="settings-page-title">
+            <aside class="settings-sidebar">
+              <h2>Settings</h2>
+              <button class="settings-nav is-active" type="button" data-settings-page="proxy"><span data-icon="globe"></span>Proxy</button>
+              <button class="settings-nav" type="button" data-settings-page="credits"><span data-icon="star"></span>Credits</button>
+            </aside>
+            <div class="settings-main">
+              <header class="settings-header">
+                <div><h3 id="settings-page-title">Proxy</h3><p id="settings-page-description">Choose how this browser connects to proxy routes.</p></div>
+                <button class="settings-close" id="settings-close" type="button" aria-label="Close settings"><span data-icon="close"></span></button>
+              </header>
+              <div class="settings-body">
+                <section class="settings-panel" id="settings-proxy-panel">
+                  <label class="setting-field" for="proxy-engine">Proxy engine
+                    <select id="proxy-engine">
+                      <option value="scramjet">Scramjet (default)</option>
+                      <option value="ultraviolet">Ultraviolet</option>
+                    </select>
+                  </label>
+                  <p class="settings-help">Scramjet uses the selected transport. Ultraviolet uses Epoxy with the same WISP routes.</p>
+                  <h4>Scramjet transport</h4>
+                  <p class="settings-help">Libcurl is the current default. Real-world speed varies by route and website.</p>
+                  <div class="transport-choices">
+                    <label class="transport-choice"><input id="transport-libcurl" type="radio" name="proxy-transport" value="libcurl" /><strong>Libcurl</strong><span>Current default transport.</span></label>
+                    <label class="transport-choice"><input id="transport-epoxy" type="radio" name="proxy-transport" value="epoxy" /><strong>Epoxy</strong><span>WISP-based alternative; also used by Ultraviolet.</span></label>
+                  </div>
+                  <div class="settings-footer"><p>Changes restart the browser runtime.</p><button class="settings-apply" id="settings-apply" type="button">Save and restart</button></div>
+                </section>
+                <section class="settings-panel" id="settings-credits-panel" hidden="hidden">
+                  <div class="credits-list">
+                    <div class="credits-row"><strong>Christian Hall</strong><span>Owner</span></div>
+                    <div class="credits-row"><span>Proxy engine 1</span><span>MercuryWorkshop</span></div>
+                    <div class="credits-row"><span>Proxy engine 2</span><span>Titanium Network</span></div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
       <span class="status" id="page-status" aria-live="polite">Starting BlueberryUB…</span>
       <script><![CDATA[
@@ -211,6 +289,62 @@
           document.querySelectorAll(".site-nav [data-view]").forEach((button) => button.classList.toggle("is-active", button.dataset.view === name));
           if (name === "browser") warmUpProxy();
         }
+        const settingsDialog = document.querySelector("#settings-dialog");
+        const settingsEngine = document.querySelector("#proxy-engine");
+        const settingsLibcurl = document.querySelector("#transport-libcurl");
+        const settingsEpoxy = document.querySelector("#transport-epoxy");
+        const settingsPageTitle = document.querySelector("#settings-page-title");
+        const settingsPageDescription = document.querySelector("#settings-page-description");
+        function showSettingsPage(name) {
+          const credits = name === "credits";
+          document.querySelector("#settings-proxy-panel").hidden = credits;
+          document.querySelector("#settings-credits-panel").hidden = !credits;
+          settingsPageTitle.textContent = credits ? "Credits" : "Proxy";
+          settingsPageDescription.textContent = credits ? "People and projects behind this browser." : "Choose how this browser connects to proxy routes.";
+          document.querySelectorAll("[data-settings-page]").forEach((button) => button.classList.toggle("is-active", button.dataset.settingsPage === name));
+        }
+        function syncSettingsForm() {
+          if (settingsEngine.value === "ultraviolet") {
+            settingsEpoxy.checked = true;
+            settingsLibcurl.disabled = true;
+          } else {
+            settingsLibcurl.disabled = false;
+          }
+        }
+        function openSettings() {
+          settingsEngine.value = proxySettings.engine;
+          settingsLibcurl.checked = proxySettings.transport === "libcurl";
+          settingsEpoxy.checked = proxySettings.transport === "epoxy";
+          syncSettingsForm();
+          showSettingsPage("proxy");
+          settingsDialog.hidden = false;
+          document.querySelector("#settings-close").focus();
+        }
+        function closeSettings() {
+          settingsDialog.hidden = true;
+          document.querySelector("#settings-button").focus();
+        }
+        document.querySelector("#settings-button").addEventListener("click", openSettings);
+        document.querySelector("#settings-close").addEventListener("click", closeSettings);
+        settingsDialog.addEventListener("click", (event) => {
+          if (event.target === settingsDialog) closeSettings();
+        });
+        document.querySelectorAll("[data-settings-page]").forEach((button) => button.addEventListener("click", () => showSettingsPage(button.dataset.settingsPage)));
+        settingsEngine.addEventListener("change", syncSettingsForm);
+        document.querySelector("#settings-apply").addEventListener("click", () => {
+          const nextSettings = {
+            engine: settingsEngine.value,
+            transport: settingsEngine.value === "ultraviolet" || settingsEpoxy.checked ? "epoxy" : "libcurl"
+          };
+          try {
+            localStorage.setItem(proxySettingsKey, JSON.stringify(nextSettings));
+          } catch (error) {
+            showStatus("Could not save proxy settings: " + error.message);
+            return;
+          }
+          proxySettings = nextSettings;
+          location.reload();
+        });
         document.querySelectorAll("[data-view]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
         document.querySelectorAll("[data-open-browser]").forEach((button) => button.addEventListener("click", () => showView("browser")));
         document.querySelector("#hub-logo").src = LOGO;
@@ -232,6 +366,7 @@
         }
 
         const bookmarksKey = "blueberryub.bookmarks";
+        const proxySettingsKey = "blueberryub.static-proxy-settings";
         const historyKey = "blueberryub.static-history";
         const recentlyClosedKey = "blueberryub.static-recently-closed";
         const zoomKey = "blueberryub.static-zoom";
@@ -255,8 +390,22 @@
         let activeTab;
         let nextTabId = 1;
         let controllerPromise;
+        let proxySettings = readProxySettings();
         let recentlyClosedTabs = readSessionValue(recentlyClosedKey, []);
         let zoomLevel = readZoom();
+
+        function readProxySettings() {
+          try {
+            const value = JSON.parse(localStorage.getItem(proxySettingsKey) || "null");
+            return {
+              engine: value?.engine === "ultraviolet" ? "ultraviolet" : "scramjet",
+              transport: value?.transport === "epoxy" ? "epoxy" : "libcurl"
+            };
+          } catch (error) {
+            console.warn("Could not read proxy settings:", error);
+            return { engine: "scramjet", transport: "libcurl" };
+          }
+        }
 
         function readBookmarks() {
           try {
@@ -491,6 +640,19 @@
             updateBookmarkButton();
           }
         }
+        function updateUltravioletLocation(tab) {
+          const runtime = tab.frame?.runtime;
+          if (runtime?.engine !== "ultraviolet") return;
+          try {
+            const current = new URL(tab.iframe.contentWindow.location.href);
+            if (!current.pathname.startsWith(runtime.uvConfig.prefix)) return;
+            const destination = runtime.uvConfig.decodeUrl(current.pathname.slice(runtime.uvConfig.prefix.length));
+            const url = new URL(destination);
+            if (["http:", "https:"].includes(url.protocol)) updateTabLocation(tab, url);
+          } catch (error) {
+            console.warn("Could not read the Ultraviolet page address:", error);
+          }
+        }
         function installPopupGuard(tab) {
           try {
             const pageWindow = tab.iframe.contentWindow;
@@ -602,7 +764,10 @@
           tab.iframe.allow = "fullscreen; autoplay; clipboard-read; clipboard-write";
           tab.iframe.referrerPolicy = "no-referrer";
           tab.iframe.hidden = true;
-          tab.iframe.addEventListener("load", () => installPopupGuard(tab));
+          tab.iframe.addEventListener("load", () => {
+            installPopupGuard(tab);
+            updateUltravioletLocation(tab);
+          });
           page.append(tab.startPage, tab.loading, tab.error, tab.iframe);
           pageHost.append(page);
           tabs.push(tab);
@@ -758,26 +923,52 @@
           if (!worker) throw new Error("No active service worker found in registration.");
           setStartup(`Checking ${WISP_URLS.length} proxy routes and loading the runtime…`, "loading", 0.18);
           const wispPromise = findWisp();
+          const wisp = await wispPromise;
+          if (proxySettings.engine === "ultraviolet") {
+            setStartup("Loading Ultraviolet and the Epoxy transport…", "loading", 0.58);
+            await loadScript(file("uv/uv.bundle.js"));
+            const uvConfig = {
+              prefix: new URL("uv/service/", scope).pathname,
+              encodeUrl: window.Ultraviolet.codec.xor.encode,
+              decodeUrl: window.Ultraviolet.codec.xor.decode,
+              handler: new URL("uv/uv.handler.js", scope).pathname,
+              client: new URL("uv/uv.client.js", scope).pathname,
+              bundle: new URL("uv/uv.bundle.js", scope).pathname,
+              config: new URL("uv/uv.config.js", scope).pathname,
+              sw: new URL("uv/uv.sw.js", scope).pathname
+            };
+            window.__uv$config = uvConfig;
+            const { BareMuxConnection } = await import(file("bare-mux/index.mjs"));
+            const mux = new BareMuxConnection(file("bare-mux/worker.js"));
+            await mux.setTransport(file("clients/epoxy/index.mjs"), [{ wisp }]);
+            return { engine: "ultraviolet", scope, uvConfig, mux };
+          }
           await loadScript(file("scram/scramjet.js"));
           setStartup("Loading the controller, transport, and browser utilities…", "loading", 0.58);
           await Promise.all([
             loadScript(file("controller/controller.api.js")),
             loadScript(file("scram/scramjet-utils.js")),
-            loadScript(file("clients/libcurl-client.js"))
+            ...(proxySettings.transport === "libcurl" ? [loadScript(file("clients/libcurl-client.js"))] : [])
           ]);
-          const wisp = await wispPromise;
           setStartup("Warming the proxy and WebAssembly runtime…", "loading", 0.82);
           const { Controller, config } = window.$scramjetController;
           config.prefix = new URL("~/sj/", scope).pathname;
           config.injectPath = file("controller/controller.inject.js");
           config.wasmPath = file("scram/scramjet.wasm");
           config.scramjetPath = file("scram/scramjet.js");
+          let transport;
+          if (proxySettings.transport === "libcurl") {
+            transport = new window.LibcurlTransport.LibcurlClient({ wisp });
+          } else {
+            const { default: EpoxyTransport } = await import(file("clients/epoxy/index.mjs"));
+            transport = new EpoxyTransport({ wisp });
+          }
           const controller = new Controller({
             serviceworker: worker,
-            transport: new window.LibcurlTransport.LibcurlClient({ wisp })
+            transport
           });
           await controller.ready;
-          return controller;
+          return { engine: "scramjet", scope, controller };
         }
         async function getController() {
           if (!controllerPromise) controllerPromise = initBootstrap().catch((error) => { controllerPromise = null; throw error; });
@@ -809,9 +1000,24 @@
           if (tab.frame) return tab.frame;
           if (!tab.framePromise) {
             tab.framePromise = (async () => {
-              const controller = await getController();
+              const runtime = await getController();
+              if (runtime.engine === "ultraviolet") {
+                return {
+                  engine: "ultraviolet",
+                  runtime,
+                  go: async (url) => {
+                    const target = `${runtime.uvConfig.prefix}${runtime.uvConfig.encodeUrl(url)}`;
+                    tab.iframe.src = new URL(target, runtime.scope).href;
+                  },
+                  back: () => tab.iframe.contentWindow.history.back(),
+                  forward: () => tab.iframe.contentWindow.history.forward(),
+                  reload: () => tab.iframe.contentWindow.location.reload()
+                };
+              }
               const watcher = new window.$scramjetUtils.UrlWatcherPlugin((url) => updateTabLocation(tab, url));
-              return controller.createFrame(tab.iframe, { plugins: [watcher] });
+              const frame = runtime.controller.createFrame(tab.iframe, { plugins: [watcher] });
+              frame.runtime = runtime;
+              return frame;
             })().catch((error) => { tab.framePromise = null; throw error; });
           }
           tab.frame = await tab.framePromise;
@@ -962,6 +1168,10 @@
           }
         });
         document.addEventListener("keydown", (event) => {
+          if (!settingsDialog.hidden) {
+            if (event.key === "Escape") closeSettings();
+            return;
+          }
           const modifier = event.ctrlKey || event.metaKey;
           if (modifier && event.key.toLowerCase() === "l") { event.preventDefault(); showView("browser"); addressInput.focus(); addressInput.select(); }
           else if (modifier && event.key.toLowerCase() === "t") { event.preventDefault(); showView("browser"); createTab(); }

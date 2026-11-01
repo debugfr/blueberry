@@ -49,6 +49,8 @@ and on manual dispatch. It compares the served SVG against GitHub's current
 `main`, retries throttled purges, and verifies the CDN content before succeeding.
 Open <https://cdn.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg>.
 
-If jsDelivr is delayed or throttled, the current file is also available directly
-from GitHub at
-<https://raw.githubusercontent.com/debugfr/blueberry/main/static/index.svg>.
+For a cache-independent, automatically deployed URL, the `Deploy static browser
+to GitHub Pages` workflow publishes `static/` after changes to `main`. Open
+<https://debugfr.github.io/blueberry/static/index.svg> after its first successful
+deployment. Do not use the `raw.githubusercontent.com` file URL as an app host:
+GitHub serves raw files with a sandbox policy that blocks the app's scripts.

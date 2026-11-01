@@ -14,10 +14,6 @@ const searchInput = document.querySelector("#game-search");
 const catalogStatus = document.querySelector("#catalog-status");
 const libraryErrors = document.querySelector("#library-errors");
 const loadMoreButton = document.querySelector("#load-more");
-const gameDialog = document.querySelector("#game-dialog");
-const gameFrame = document.querySelector("#game-frame");
-const playerTitle = document.querySelector("#player-title");
-const playerSource = document.querySelector("#player-source");
 const pageSize = 72;
 
 let games = [];
@@ -179,29 +175,13 @@ function refreshGames() {
 }
 
 function openGame(game) {
-  playerTitle.textContent = game.name;
-  playerSource.textContent = `Provided by ${game.libraryName}`;
-  gameFrame.title = game.name;
-  gameFrame.src = game.url;
-  gameDialog.showModal();
+  const proxyUrl = new URL("index.svg", location.href);
+  proxyUrl.searchParams.set("goto", game.url);
+  location.assign(proxyUrl);
 }
 
 librarySelect.addEventListener("change", refreshGames);
 searchInput.addEventListener("input", refreshGames);
 loadMoreButton.addEventListener("click", renderGames);
-document.querySelector("#close-game").addEventListener("click", () => gameDialog.close());
-gameDialog.addEventListener("click", (event) => {
-  if (event.target === gameDialog) gameDialog.close();
-});
-gameDialog.addEventListener("close", () => {
-  gameFrame.removeAttribute("src");
-});
-document.querySelector("#fullscreen-game").addEventListener("click", async () => {
-  try {
-    await gameFrame.requestFullscreen();
-  } catch (error) {
-    catalogStatus.textContent = `Could not enter fullscreen: ${error.message}`;
-  }
-});
 
 void loadLibraries();

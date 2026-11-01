@@ -44,8 +44,8 @@ history. History can be paused or cleared from Profile.
 
 The Games page lists the Seraph, CKV, Truffled, and UGS catalogs published by
 [gmshelf](https://github.com/gmshelf). Catalogs load from jsDelivr; selected
-games run in a sandboxed iframe as third-party content. Game pages use
-raw.githack because jsDelivr serves those HTML files as plain text.
+games open through Blueberry's Scramjet proxy as third-party content. Game pages
+use raw.githack because jsDelivr serves those HTML files as plain text.
 
 ## Deploy
 

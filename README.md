@@ -43,4 +43,6 @@ added once BlueberryUB has games.
 
 ## Deploy
 
-Push to `main`, purge <https://purge.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg>, then open <https://cdn.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg>.
+Push changes to `main`. The `Purge jsDelivr cache` GitHub Actions workflow
+automatically purges the static app URL after each push; wait for that workflow
+to finish, then open <https://cdn.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg>.

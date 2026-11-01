@@ -1,0 +1,16 @@
+name: Purge jsDelivr cache
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Purge the static app URL
+        run: curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 2 "https://purge.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg"

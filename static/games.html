@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#e9eef2" />
+    <meta name="description" content="Browse third-party games from gmshelf libraries." />
+    <title>Games | BlueberryUB</title>
+    <link rel="stylesheet" href="./games.css" />
+    <script src="./games.js" defer></script>
+  </head>
+  <body>
+    <header class="games-header">
+      <a class="brand" href="/" aria-label="BlueberryUB home">
+        <img src="/logo/blueub.png" alt="" />
+        <span>BlueberryUB</span>
+      </a>
+      <div>
+        <p class="eyebrow">BLUEBERRYUB LIBRARY</p>
+        <h1>Games</h1>
+      </div>
+      <a class="back-link" href="/">Home</a>
+    </header>
+
+    <main class="games-main">
+      <p class="notice">Games are third-party content provided by gmshelf libraries.</p>
+      <section class="library-tools" aria-label="Find a game">
+        <label>
+          <span>Library</span>
+          <select id="library-select">
+            <option value="">All libraries</option>
+            <option value="seraph">Seraph</option>
+            <option value="ckv">CKV</option>
+            <option value="truffled">Truffled</option>
+            <option value="ugs">UGS</option>
+          </select>
+        </label>
+        <label class="search-field">
+          <span>Search games</span>
+          <input id="game-search" type="search" placeholder="Search by name" autocomplete="off" />
+        </label>
+      </section>
+
+      <p id="catalog-status" class="catalog-status" role="status" aria-live="polite">Loading game libraries…</p>
+      <div id="library-errors" class="library-errors" role="alert" hidden></div>
+      <section id="games-grid" class="games-grid" aria-label="Games"></section>
+      <button id="load-more" class="load-more" type="button" hidden>Load more games</button>
+    </main>
+
+    <dialog id="game-dialog" class="game-dialog" aria-label="Game player">
+      <header class="player-header">
+        <div>
+          <h2 id="player-title">Game</h2>
+          <p id="player-source"></p>
+        </div>
+        <div class="player-actions">
+          <button id="fullscreen-game" type="button">Fullscreen</button>
+          <button id="close-game" class="close-game" type="button" aria-label="Close game">×</button>
+        </div>
+      </header>
+      <iframe
+        id="game-frame"
+        title="Third-party game"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups allow-orientation-lock"
+        allow="fullscreen; gamepad; autoplay"
+        allowfullscreen
+        referrerpolicy="no-referrer"
+      ></iframe>
+    </dialog>
+  </body>
+</html>

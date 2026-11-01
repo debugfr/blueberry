@@ -1,7 +1,7 @@
 # BlueberryUB
 
-BlueberryUB opens to a four-option radial home screen. The Browser option opens the
-tabbed browser at `/browser.html`; the other options are placeholders for now.
+BlueberryUB opens to a radial home screen with Browser and Games options. The
+Browser option opens the tabbed browser at `/browser.html`.
 The browser uses the official Scramjet proxy bootstrap, searches non-URL text with
 DuckDuckGo, and adapts to the device viewport.
 
@@ -38,8 +38,14 @@ npx supabase functions deploy delete-account --project-ref bizsbvyaktrtkitayqkm
 ```
 
 Create an account at `/profile.html` to sync a display name and optionally save
-history. History can be paused or cleared from Profile. Game-state syncing can be
-added once BlueberryUB has games.
+history. History can be paused or cleared from Profile.
+
+## Games
+
+The Games page lists the Seraph, CKV, Truffled, and UGS catalogs published by
+[gmshelf](https://github.com/gmshelf). Catalogs load from jsDelivr; selected
+games run in a sandboxed iframe as third-party content. Game pages use
+raw.githack because jsDelivr serves those HTML files as plain text.
 
 ## Deploy
 

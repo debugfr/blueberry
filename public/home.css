@@ -159,6 +159,17 @@ a {
   transform: translate(-50%, -3px);
 }
 
+.games-option {
+  top: 50%;
+  left: -1%;
+  transform: translateY(-50%);
+  color: #39708a;
+}
+
+.games-option:hover:not(:disabled) {
+  transform: translateY(calc(-50% - 3px));
+}
+
 .soon-option {
   color: #788792;
   cursor: not-allowed;
@@ -262,6 +273,10 @@ a {
   }
 
   .soon-left {
+    left: -3%;
+  }
+
+  .games-option {
     left: -3%;
   }
 

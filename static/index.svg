@@ -624,32 +624,38 @@
           return null;
         });
         function probeWisp(url) {
-          return new Promise((resolve, reject) => {
+          let finish;
+          const result = new Promise((resolve) => {
             let socket;
             let settled = false;
-            const finish = (error) => {
+            finish = (reachable) => {
               if (settled) return;
               settled = true;
               clearTimeout(timer);
               if (socket && socket.readyState < WebSocket.CLOSING) socket.close();
-              if (error) reject(error);
-              else resolve(url);
+              resolve(reachable ? url : null);
             };
-            const timer = setTimeout(() => finish(new Error("WebSocket connection timed out")), 5000);
+            const timer = setTimeout(() => finish(false), 5000);
             try {
               socket = new WebSocket(url);
-              socket.addEventListener("open", () => finish());
-              socket.addEventListener("error", () => finish(new Error("WebSocket connection failed")));
-              socket.addEventListener("close", () => { if (!settled) finish(new Error("WebSocket closed before opening")); });
+              socket.addEventListener("open", () => finish(true), { once: true });
+              socket.addEventListener("error", () => finish(false), { once: true });
+              socket.addEventListener("close", () => finish(false), { once: true });
             } catch (error) {
-              finish(error);
+              console.warn(`WISP check failed for ${url}:`, error);
+              finish(false);
             }
           });
+          return { result, cancel: () => finish(false) };
         }
         async function findWisp() {
-          for (const url of WISP_URLS) {
-            try { return await probeWisp(url); }
-            catch { /* Continue to the next configured endpoint. */ }
+          const probes = WISP_URLS.map(probeWisp);
+          for (const probe of probes) {
+            const url = await probe.result;
+            if (url) {
+              probes.forEach((other) => other.cancel());
+              return url;
+            }
           }
           throw new Error("No proxy server reachable");
         }

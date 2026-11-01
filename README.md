@@ -40,3 +40,7 @@ npx supabase functions deploy delete-account --project-ref bizsbvyaktrtkitayqkm
 Create an account at `/profile.html` to sync a display name and optionally save
 history. History can be paused or cleared from Profile. Game-state syncing can be
 added once BlueberryUB has games.
+
+## Deploy
+
+Push to `main`, purge <https://purge.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg>, then open <https://cdn.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg>.

@@ -159,15 +159,15 @@
                   <label class="setting-field" for="proxy-engine">Proxy engine
                     <select id="proxy-engine">
                       <option value="scramjet">Scramjet (default)</option>
-                      <option value="ultraviolet">Ultraviolet</option>
+                      <option value="ultraviolet" disabled="disabled">Ultraviolet (WIP)</option>
                     </select>
                   </label>
-                  <p class="settings-help">Scramjet uses the selected transport. Ultraviolet uses Epoxy with the same WISP routes.</p>
+                  <p class="settings-help">Ultraviolet is a work in progress and is unavailable for now.</p>
                   <h4>Scramjet transport</h4>
                   <p class="settings-help">Libcurl is the current default. Real-world speed varies by route and website.</p>
                   <div class="transport-choices">
                     <label class="transport-choice"><input id="transport-libcurl" type="radio" name="proxy-transport" value="libcurl" /><strong>Libcurl</strong><span>Current default transport.</span></label>
-                    <label class="transport-choice"><input id="transport-epoxy" type="radio" name="proxy-transport" value="epoxy" /><strong>Epoxy</strong><span>WISP-based alternative; also used by Ultraviolet.</span></label>
+                    <label class="transport-choice"><input id="transport-epoxy" type="radio" name="proxy-transport" value="epoxy" /><strong>Epoxy (Beta)</strong><span>Beta WISP-based alternative transport.</span></label>
                   </div>
                   <div class="settings-footer"><p>Changes restart the browser runtime.</p><button class="settings-apply" id="settings-apply" type="button">Save and restart</button></div>
                 </section>
@@ -333,8 +333,8 @@
         settingsEngine.addEventListener("change", syncSettingsForm);
         document.querySelector("#settings-apply").addEventListener("click", () => {
           const nextSettings = {
-            engine: settingsEngine.value,
-            transport: settingsEngine.value === "ultraviolet" || settingsEpoxy.checked ? "epoxy" : "libcurl"
+            engine: "scramjet",
+            transport: settingsEpoxy.checked ? "epoxy" : "libcurl"
           };
           try {
             localStorage.setItem(proxySettingsKey, JSON.stringify(nextSettings));
@@ -398,7 +398,7 @@
           try {
             const value = JSON.parse(localStorage.getItem(proxySettingsKey) || "null");
             return {
-              engine: value?.engine === "ultraviolet" ? "ultraviolet" : "scramjet",
+              engine: "scramjet",
               transport: value?.transport === "epoxy" ? "epoxy" : "libcurl"
             };
           } catch (error) {

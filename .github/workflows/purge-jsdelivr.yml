@@ -4,25 +4,55 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "23 */6 * * *"
   workflow_dispatch:
 
 permissions: {}
 
+concurrency:
+  group: purge-jsdelivr-main
+  cancel-in-progress: false
+
 jobs:
   purge:
     runs-on: ubuntu-latest
+    timeout-minutes: 360
     steps:
-      - name: Purge the static app URL
+      - name: Check and refresh the stable app URL
         run: |
           python3 - <<'PY'
           import json
           import time
           import urllib.request
 
+          cdn_url = "https://cdn.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg"
+          source_url = "https://raw.githubusercontent.com/debugfr/blueberry/main/static/index.svg"
           purge_url = "https://purge.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg"
           path = "/gh/debugfr/blueberry@main/static/index.svg"
 
-          for attempt in range(10):
+          def fetch(url):
+              request = urllib.request.Request(url, headers={"User-Agent": "BlueberryUB cache refresh"})
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  return response.read()
+
+          def cdn_is_current():
+              try:
+                  current = fetch(cdn_url)
+                  source = fetch(source_url)
+              except Exception as error:
+                  print(f"Could not compare CDN and GitHub source: {error}")
+                  return False
+              if current == source:
+                  print(f"Stable CDN URL is current ({len(current)} bytes).")
+                  return True
+              print(f"Stable CDN is stale ({len(current)} bytes; GitHub main is {len(source)} bytes).")
+              return False
+
+          if cdn_is_current():
+              raise SystemExit(0)
+
+          for attempt in range(20):
               request = urllib.request.Request(purge_url, headers={"User-Agent": "BlueberryUB cache purge"})
               with urllib.request.urlopen(request, timeout=30) as response:
                   result = json.load(response)
@@ -32,15 +62,19 @@ jobs:
                   if path_result is None:
                       raise RuntimeError(f"jsDelivr did not return a result for {path}: {result}")
                   if not path_result.get("throttled", False):
-                      print(f"Purged {path}")
-                      break
+                      print(f"Purge accepted for {path}; verifying cached content.")
+                      for check in range(30):
+                          if cdn_is_current():
+                              raise SystemExit(0)
+                          time.sleep(10)
+                      raise RuntimeError("Purge was accepted, but jsDelivr still serves stale content.")
                   delay = int(path_result.get("throttlingReset", 60)) + 2
                   print(f"jsDelivr throttled this purge; retrying in {delay}s")
               else:
                   delay = min(60, 2 ** attempt)
                   print(f"Purge status is {result.get('status')!r}; retrying in {delay}s")
 
-              if attempt == 9:
+              if attempt == 19:
                   raise RuntimeError(f"jsDelivr purge did not complete successfully: {result}")
               time.sleep(delay)
           PY

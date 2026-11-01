@@ -44,6 +44,11 @@ added once BlueberryUB has games.
 ## Deploy
 
 Push changes to `main`. The `Purge jsDelivr cache` GitHub Actions workflow
-automatically purges the static app URL after each push. It checks jsDelivr's
-response and retries if the purge is throttled; once the workflow succeeds, open
-<https://cdn.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg>.
+checks and refreshes the stable jsDelivr URL after each push, every six hours,
+and on manual dispatch. It compares the served SVG against GitHub's current
+`main`, retries throttled purges, and verifies the CDN content before succeeding.
+Open <https://cdn.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg>.
+
+If jsDelivr is delayed or throttled, the current file is also available directly
+from GitHub at
+<https://raw.githubusercontent.com/debugfr/blueberry/main/static/index.svg>.

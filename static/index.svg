@@ -88,28 +88,37 @@
           .games-panel>p{margin:0 0 16px;color:#7a8796;font-size:11px}
           .games-tools{display:grid;grid-template-columns:minmax(150px,.34fr) 1fr;gap:10px;margin-bottom:12px}
           .games-tools label{display:grid;gap:5px;color:#627386;font-size:10px;font-weight:700}
-          .games-tools input,.games-tools select{width:100%;height:38px;padding:0 10px;color:#344459;background:#fff;border:1px solid #d8e1e7;border-radius:6px;font-size:11px}
+          .games-tools input,.games-tools select{width:100%;height:42px;padding:0 13px;color:#344459;background-color:#fff;border:1px solid #d8e1e7;border-radius:7px;box-shadow:0 2px 6px rgba(40,62,79,.04);font-size:11px;transition:border-color 150ms ease,box-shadow 150ms ease}
+          .games-tools input:focus,.games-tools select:focus{border-color:#78a7bd;outline:0;box-shadow:0 0 0 3px rgba(52,124,164,.13)}
+          .games-tools select{appearance:none;padding-right:38px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23627386' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;cursor:pointer}
+          .games-tools select option{padding:9px;color:#344459;background:#fff}
           .games-status{min-height:18px;margin:10px 0;color:#758492;font-size:10px}
           .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:11px}
-          .game-card{min-width:0;padding:0;overflow:hidden;color:#344459;background:#fff;border:1px solid #dce4e9;border-radius:7px;text-align:left;cursor:pointer}
-          .game-card:hover{border-color:#9bb9c9;box-shadow:0 6px 16px #28465c1a}
+          .game-card{min-width:0;padding:0;overflow:hidden;color:#344459;background:#fff;border:1px solid #dce4e9;border-radius:9px;text-align:left;cursor:pointer;box-shadow:0 2px 8px rgba(40,62,79,.04);transition:transform 150ms ease,border-color 150ms ease,box-shadow 150ms ease}
+          .game-card:hover{transform:translateY(-2px);border-color:#9bb9c9;box-shadow:0 9px 22px #28465c1a}
           .game-card:focus-visible,.games-more:focus-visible{outline:2px solid #347ca4;outline-offset:2px}
-          .game-art{aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden;color:#6a8798;background:linear-gradient(145deg,#eef4f7,#dce7ed)}
+          .game-art{aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden;color:#6a8798;background:linear-gradient(145deg,#f4f8fa,#dce7ed)}
           .game-art img{width:100%;height:100%;object-fit:cover}
           .game-art-fallback{font-size:27px;font-weight:800}
           .game-name,.game-library{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
           .game-name{padding:8px 9px 2px;font-size:10px;font-weight:700}
           .game-library{padding:0 9px 9px;color:#8794a1;font:8px monospace;text-transform:uppercase}
           .games-more{min-height:34px;display:block;margin:18px auto;padding:0 14px;color:#fff;background:#367b9b;border:0;border-radius:5px;font-size:10px;font-weight:700;cursor:pointer}
-          .game-player{position:fixed;z-index:70;inset:0;display:flex;flex-direction:column;background:#111820}
+          .game-player{position:fixed;z-index:70;inset:0;display:flex;flex-direction:column;background:#e9eef2}
           .game-player[hidden]{display:none}
-          .game-player-bar{min-height:48px;display:flex;align-items:center;gap:10px;padding:0 12px;color:#edf3f6;background:#1d2933}
-          .game-player-bar h2{min-width:0;flex:1;margin:0;overflow:hidden;font-size:12px;text-overflow:ellipsis;white-space:nowrap}
-          .game-player-bar button{min-height:30px;padding:0 10px;color:#dce8ee;background:#33434e;border:0;border-radius:5px;font-size:10px}
-          .game-player-bar button:hover{background:#435865}
-          .game-player-status{padding:7px 12px;color:#cedbe2;background:#25343e;font-size:10px}
-          .game-player-frame{width:100%;min-height:0;flex:1;border:0;background:#05080b}
-          @media(max-width:560px){.games-tools{grid-template-columns:1fr}.games-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+          .game-player-bar{min-height:66px;display:flex;align-items:center;gap:16px;padding:9px clamp(12px,3vw,26px);color:#344459;background:rgba(248,250,251,.97);border-bottom:1px solid #dce4e9;box-shadow:0 3px 12px rgba(32,54,69,.07)}
+          .game-player-heading{min-width:0;flex:1}
+          .game-player-eyebrow{margin:0 0 3px;color:#7a8a98;font:9px monospace;letter-spacing:1px;text-transform:uppercase}
+          .game-player-bar h2{margin:0;overflow:hidden;color:#26384b;font-size:14px;font-weight:800;text-overflow:ellipsis;white-space:nowrap}
+          .game-player-actions{display:flex;align-items:center;gap:7px}
+          .game-player-bar button{min-height:35px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;color:#52677a;background:#fff;border:1px solid #dce5eb;border-radius:7px;font-size:10px;font-weight:700;white-space:nowrap;transition:background 120ms ease,border-color 120ms ease,color 120ms ease}
+          .game-player-bar button:hover{color:#246384;background:#f1f7fa;border-color:#acc4d1}
+          .game-player-bar button:focus-visible{outline:2px solid #347ca4;outline-offset:2px}
+          .game-player-bar button .icon{width:15px;height:15px}
+          .game-player-status{min-height:30px;display:flex;align-items:center;padding:5px clamp(12px,3vw,26px);color:#718191;background:#f2f6f8;border-bottom:1px solid #e0e7eb;font-size:10px}
+          .game-player-status[data-state="error"]{color:#9e4f49;background:#fff1ef}
+          .game-player-frame{width:100%;min-height:0;flex:1;border:10px solid #e9eef2;border-top:0;background:#fff}
+          @media(max-width:560px){.games-tools{grid-template-columns:1fr}.games-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.game-player-bar{min-height:58px;gap:8px;padding:8px}.game-player-heading{min-width:72px}.game-player-bar h2{font-size:12px}.game-player-eyebrow{font-size:8px}.game-player-actions{gap:4px}.game-player-bar button{width:34px;min-height:34px;gap:0;padding:0;font-size:0}.game-player-bar button .icon{width:17px;height:17px}.game-player-frame{border-width:5px;border-top:0}}
           .games-option{top:50%;left:-1%;transform:translateY(-50%);color:#39708a}
           .games-option:hover:not(:disabled){transform:translateY(calc(-50% - 3px))}
           @media(max-width:560px){.games-option{left:-3%}}
@@ -162,11 +171,14 @@
           </section>
           <section class="game-player" id="game-player" aria-label="Game player" hidden="hidden">
             <header class="game-player-bar">
-              <button id="game-player-back" type="button">Back to games</button>
-              <h2 id="game-player-title">Game</h2>
-              <button id="game-player-fullscreen" type="button">Fullscreen</button>
+              <button id="game-player-back" type="button" aria-label="Back to games" title="Back to games"><span data-icon="back"></span><span class="game-player-button-label">Games</span></button>
+              <div class="game-player-heading"><p class="game-player-eyebrow">Now playing</p><h2 id="game-player-title">Game</h2></div>
+              <div class="game-player-actions">
+                <button id="game-player-restart" type="button" aria-label="Restart game" title="Restart game"><span data-icon="reload"></span><span class="game-player-button-label">Restart</span></button>
+                <button id="game-player-fullscreen" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen"><span data-icon="fullscreen"></span><span class="game-player-button-label">Fullscreen</span></button>
+              </div>
             </header>
-            <p class="game-player-status" id="game-player-status" role="status" aria-live="polite">Preparing isolated game player…</p>
+            <p class="game-player-status" id="game-player-status" data-state="loading" role="status" aria-live="polite">Preparing the game in an isolated player…</p>
             <iframe class="game-player-frame" id="game-player-frame" title="Game" sandbox="allow-scripts allow-forms allow-downloads allow-pointer-lock allow-orientation-lock" allow="fullscreen; autoplay; gamepad; pointer-lock; clipboard-read; clipboard-write"></iframe>
           </section>
         </main>
@@ -412,6 +424,7 @@
         let renderedGames = 0;
         let gameCatalogPromise;
         let gameLaunchId = 0;
+        let currentGame;
         function safeGamePath(path) {
           if (typeof path !== "string" || !path.trim()) return "";
           const clean = path.trim().replace(/^\/+/, "");
@@ -478,68 +491,91 @@
         }
         function buildGameRunner(game, source) {
           const parser = new DOMParser();
-          const document = parser.parseFromString(source, "text/html");
+          const cleanSource = source.replace(/https?:\/\/raw\.githack\.com\/[^"'`\s<>)]+/gi, (url) => pinGameUrl(new URL(url)));
+          const document = parser.parseFromString(cleanSource, "text/html");
           const sourceRevision = gameSourceRevisions[game.libraryId];
           const repositoryRoot = `${gamesCdn}${game.libraryId}@${sourceRevision}/`;
           const gameDirectory = new URL(".", game.url).href;
+          function resolveGameUrl(value) {
+            const trimmed = value.trim();
+            if (!trimmed || /^(?:data:|blob:|javascript:|mailto:|tel:|#)/i.test(trimmed)) return value;
+            const url = new URL(trimmed, trimmed.startsWith("/") ? repositoryRoot : gameDirectory);
+            return pinGameUrl(url);
+          }
           document.querySelectorAll("base").forEach((base) => base.remove());
           const base = document.createElement("base");
           base.href = gameDirectory;
           document.head.prepend(base);
-          const resolveRepositoryPath = (value) => {
-            if (!value.startsWith("/") || value.startsWith("//")) return value;
-            return new URL(value.slice(1), repositoryRoot).href;
-          };
           for (const element of document.querySelectorAll("[src],[href],[poster],[action],[data]")) {
             for (const attribute of ["src", "href", "poster", "action", "data"]) {
               const value = element.getAttribute(attribute);
-              if (value) element.setAttribute(attribute, resolveRepositoryPath(value.trim()));
+              if (value) element.setAttribute(attribute, resolveGameUrl(value));
             }
             const style = element.getAttribute("style");
-            if (style) element.setAttribute("style", style.replace(/url\((['"]?)\/(?!\/)/gi, `url($1${repositoryRoot}`));
+            if (style) element.setAttribute("style", rewriteGameCss(style, resolveGameUrl));
           }
           for (const element of document.querySelectorAll("[srcset]")) {
             const srcset = element.getAttribute("srcset");
             if (srcset) {
               element.setAttribute("srcset", srcset.split(",").map((candidate) => {
                 const [url, ...descriptor] = candidate.trim().split(/\s+/);
-                return [resolveRepositoryPath(url), ...descriptor].join(" ");
+                return [resolveGameUrl(url), ...descriptor].join(" ");
               }).join(", "));
             }
           }
           for (const style of document.querySelectorAll("style")) {
-            style.textContent = style.textContent.replace(/url\((['"]?)\/(?!\/)/gi, `url($1${repositoryRoot}`);
+            style.textContent = rewriteGameCss(style.textContent, resolveGameUrl);
           }
           const sandboxBridge = document.createElement("script");
-          sandboxBridge.textContent = `(()=>{const makeStore=()=>{const values=new Map;return{get length(){return values.size},key:(i)=>[...values.keys()][i]??null,getItem:(k)=>values.has(String(k))?values.get(String(k)):null,setItem:(k,v)=>values.set(String(k),String(v)),removeItem:(k)=>values.delete(String(k)),clear:()=>values.clear()}};for(const key of ["localStorage","sessionStorage"]){try{void window[key]}catch{Object.defineProperty(window,key,{configurable:true,value:makeStore()})}}window.open=()=>null})();`;
+          sandboxBridge.textContent = `(()=>{const report=(message)=>window.parent.postMessage({type:"blueberry-game-error",message:String(message).slice(0,240)},"*");const makeStore=()=>{const values=new Map;return{get length(){return values.size},key:(i)=>[...values.keys()][i]??null,getItem:(k)=>values.has(String(k))?values.get(String(k)):null,setItem:(k,v)=>values.set(String(k),String(v)),removeItem:(k)=>values.delete(String(k)),clear:()=>values.clear()}};for(const key of ["localStorage","sessionStorage"]){try{void window[key]}catch{Object.defineProperty(window,key,{configurable:true,value:makeStore()})}}window.open=()=>null;window.addEventListener("error",event=>report(event.message||event.target?.src||event.target?.href||"Game resource failed to load"),true);window.addEventListener("unhandledrejection",event=>report(event.reason?.message||event.reason||"Game promise failed"))})();`;
           document.head.insertBefore(sandboxBridge, base.nextSibling);
           return `<!doctype html>${document.documentElement.outerHTML}`;
+        }
+        function pinGameUrl(url) {
+          if (url.hostname.toLowerCase() !== "raw.githack.com") return url.href;
+          const [owner, repository, branch, ...path] = url.pathname.split("/").filter(Boolean);
+          if (!owner || !repository || !branch || !path.length) return url.href;
+          const revision = owner === "gmshelf" ? gameSourceRevisions[repository] || branch : branch;
+          const encodedPath = path.map((part) => encodeURIComponent(decodeURIComponent(part))).join("/");
+          return `https://gcore.jsdelivr.net/gh/${encodeURIComponent(owner)}/${encodeURIComponent(repository)}@${encodeURIComponent(revision)}/${encodedPath}${url.search}${url.hash}`;
+        }
+        function rewriteGameCss(css, resolveUrl) {
+          return css.replace(/url\((['"]?)(.*?)\1\)/gi, (match, quote, value) =>
+            `url("${resolveUrl(value)}")`
+          ).replace(/@import\s+(['"])(.*?)\1/gi, (match, quote, value) =>
+            `@import "${resolveUrl(value)}"`
+          );
         }
         function releaseGameFrame() {
           gamePlayerFrame.srcdoc = "";
         }
         function closeGamePlayer() {
           gameLaunchId += 1;
+          currentGame = null;
           releaseGameFrame();
           gamePlayer.hidden = true;
           gamesSearch.focus();
         }
         async function openGame(game) {
           const launchId = ++gameLaunchId;
+          currentGame = game;
           releaseGameFrame();
           gamePlayer.hidden = false;
           gamePlayerTitle.textContent = game.name;
           gamePlayerFrame.title = game.name;
+          gamePlayerStatus.dataset.state = "loading";
           gamePlayerStatus.textContent = "Loading game code into the sandboxed player…";
           try {
             const response = await fetch(game.url, { headers: { Accept: "text/html,*/*" } });
             if (!response.ok) throw new Error(`Game source returned HTTP ${response.status}`);
             const source = await response.text();
+            if (!/<(?:!doctype\s+html|html\b)/i.test(source)) throw new Error("This library entry does not contain an HTML game page.");
             if (launchId !== gameLaunchId) return;
             gamePlayerFrame.srcdoc = buildGameRunner(game, source);
-            if (launchId === gameLaunchId) gamePlayerStatus.textContent = "Running in the isolated game player.";
+            if (launchId === gameLaunchId) gamePlayerStatus.textContent = "Starting game in the isolated player…";
           } catch (error) {
             if (launchId === gameLaunchId) {
+              gamePlayerStatus.dataset.state = "error";
               gamePlayerStatus.textContent = `Could not run this game: ${error.message}`;
               showStatus("Game could not be opened");
             }
@@ -685,7 +721,18 @@
         gamesMore.addEventListener("click", renderGames);
         document.querySelector("#game-player-back").addEventListener("click", closeGamePlayer);
         gamePlayerFrame.addEventListener("load", () => {
-          if (!gamePlayer.hidden && gamePlayerFrame.srcdoc) gamePlayerStatus.textContent = "Game is running in the built-in player.";
+          if (!gamePlayer.hidden && gamePlayerFrame.srcdoc && gamePlayerStatus.dataset.state !== "error") {
+            gamePlayerStatus.dataset.state = "ready";
+            gamePlayerStatus.textContent = "Game loaded. Use the controls above to restart or enter fullscreen.";
+          }
+        });
+        document.querySelector("#game-player-restart").addEventListener("click", () => {
+          if (currentGame) openGame(currentGame);
+        });
+        window.addEventListener("message", (event) => {
+          if (event.source !== gamePlayerFrame.contentWindow || event.data?.type !== "blueberry-game-error") return;
+          gamePlayerStatus.dataset.state = "error";
+          gamePlayerStatus.textContent = `Game reported an error: ${event.data.message}`;
         });
         document.querySelector("#game-player-fullscreen").addEventListener("click", async () => {
           try {
@@ -1719,6 +1766,11 @@
         });
         renderBookmarks();
         createTab();
+        if (document.contentType === "image/svg+xml" && "serviceWorker" in navigator) {
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (document.contentType === "image/svg+xml") location.reload();
+          }, { once: true });
+        }
         warmUpProxy();
         const startupParams = new URL(location.href).searchParams;
         const initialUrl = startupParams.get("goto");

@@ -40,6 +40,14 @@ npx supabase functions deploy delete-account --project-ref bizsbvyaktrtkitayqkm
 Create an account at `/profile.html` to sync a display name and optionally save
 history. History can be paused or cleared from Profile.
 
+## Static app settings
+
+The static app's Settings menu includes General (English and Spanish for the
+home screen and settings), Privacy, Proxy, and About pages. The privacy page
+explains that the app does not disguise destination websites and that session
+history does not conceal activity from sites, proxy providers, or network
+administrators. About lists the app version and upstream project credits.
+
 ## Games
 
 The Games view is embedded in `static/index.svg` so it renders from jsDelivr.

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml" width="100%" height="100%">
+  <title>BlueberryUB</title>
+  <xhtml:link rel="icon" type="image/png" href="../logo/blueub.png"/>
   <foreignObject x="0" y="0" width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml" id="app">
       <style><![CDATA[
@@ -313,6 +315,13 @@
         };
         const iconUri = (name) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#64758a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">${ICON_PATHS[name] || ICON_PATHS.globe}</svg>`)}`;
         const createHtmlElement = (name) => document.createElementNS("http://www.w3.org/1999/xhtml", name);
+        function setBrandLogo(image) {
+          image.onerror = () => {
+            image.onerror = null;
+            image.src = LOGO;
+          };
+          image.src = new URL("../logo/blueub.png", location.href).href;
+        }
         function faviconUrl(value) {
           try {
             const url = new URL(value);
@@ -357,7 +366,7 @@
         const startupProgress = document.querySelector("#startup-progress");
         const startupRetry = document.querySelector("#startup-retry");
         const startupContinue = document.querySelector("#startup-continue");
-        document.querySelector("#startup-logo").src = LOGO;
+        setBrandLogo(document.querySelector("#startup-logo"));
         function setStartup(message, state = "loading", progress) {
           startupScreen.dataset.state = state;
           startupTitle.textContent = state === "error" ? "Proxy setup needs attention" : "Preparing your browser";
@@ -871,7 +880,8 @@
         document.querySelectorAll("[data-view]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
         document.querySelectorAll("[data-open-browser]").forEach((button) => button.addEventListener("click", () => showView("browser")));
         document.querySelectorAll("[data-open-games]").forEach((button) => button.addEventListener("click", () => showView("games")));
-        document.querySelector("#hub-logo").src = LOGO;
+        document.querySelectorAll(".brand img, .home-logo").forEach(setBrandLogo);
+        setBrandLogo(document.querySelector("#hub-logo"));
         const hub = document.querySelector(".hub");
         const logoFrame = document.querySelector(".logo-frame");
         if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -1112,7 +1122,7 @@
             if (item.local) {
               const logoImage = createHtmlElement("img");
               logoImage.className = "quick-link-favicon";
-              logoImage.src = LOGO;
+              setBrandLogo(logoImage);
               logoImage.alt = "";
               mark.append(logoImage);
             } else {
@@ -1131,7 +1141,7 @@
           const identity = createHtmlElement("div");
           identity.className = "start-identity";
           const logo = createHtmlElement("img");
-          logo.src = LOGO;
+          setBrandLogo(logo);
           logo.alt = "BlueberryUB";
           const title = createHtmlElement("h1");
           title.textContent = "A fresh start.";
@@ -1242,7 +1252,7 @@
           button.setAttribute("aria-selected", "false");
           const favicon = createHtmlElement("img");
           favicon.className = "tab-favicon";
-          favicon.src = LOGO;
+          setBrandLogo(favicon);
           favicon.alt = "";
           const title = createHtmlElement("span");
           title.className = "tab-title";

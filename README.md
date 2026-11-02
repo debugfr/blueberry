@@ -47,6 +47,8 @@ home screen and settings), Privacy, Proxy, and About pages. The privacy page
 explains that the app does not disguise destination websites and that session
 history does not conceal activity from sites, proxy providers, or network
 administrators. About lists the app version and upstream project credits.
+The static app tab is titled BlueberryUB and uses `logo/blueub.png` for its
+favicon and app branding.
 
 ## Games
 

@@ -1,6 +1,6 @@
 # BlueberryUB
 
-BlueberryUB opens to a radial home screen with Browser and Games options. The
+BlueberryUB opens to a radial home screen with Browser and Apps options. The
 Browser option opens the tabbed browser at `/browser.html`.
 The browser uses the official Scramjet proxy bootstrap, searches non-URL text with
 DuckDuckGo, and adapts to the device viewport.
@@ -50,17 +50,15 @@ administrators. About lists the app version and upstream project credits.
 The static app tab is titled BlueberryUB and uses `logo/blueub.png` for its
 favicon and app branding.
 
-## Games
+## Apps
 
-The Games view is embedded in `static/index.svg` so it renders from jsDelivr.
-It lists the Seraph, CKV, Truffled, and UGS catalogs published by
-[gmshelf](https://github.com/gmshelf). Catalogs and game source files load from
-jsDelivr. Games run in an isolated, built-in player; the combined catalog
-deduplicates matching titles and uses available covers from every library,
-including uniquely matched abbreviated cover names.
+The Apps view in `static/index.svg` displays the 12 supplied logos in a
+responsive grid with up to six apps per row. Selecting a logo opens that site
+in the built-in browser. The tab strip supports up to 15 tabs and shrinks tabs
+as needed; the static browser does not include bookmarks.
 
-Open the catalog directly at
-<https://cdn.jsdelivr.net/gh/debugfr/blueberry@main/static/index.svg?view=games>.
+The app logos are stored in `apps/logos/` and are referenced relative to the
+static app so they work from the versioned jsDelivr URL.
 
 ## Deploy
 

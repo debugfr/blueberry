@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "static/**"
+      - "apps/logos/**"
       - ".github/workflows/deploy-static-pages.yml"
   workflow_dispatch:
 
@@ -33,6 +34,8 @@ jobs:
         run: |
           mkdir -p _site/static
           cp -R static/. _site/static/
+          mkdir -p _site/apps/logos
+          cp -R apps/logos/. _site/apps/logos/
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

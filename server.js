@@ -25,6 +25,7 @@ app.use(
   express.static(path.join(root, "node_modules/@supabase/supabase-js/dist/umd"))
 );
 app.use("/logo", express.static(path.join(root, "logo")));
+app.use("/apps", express.static(path.join(root, "apps")));
 app.use("/static", express.static(path.join(root, "static")));
 app.use(express.static(path.join(root, "public")));
 

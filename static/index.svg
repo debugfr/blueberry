@@ -283,8 +283,8 @@
                 <section class="settings-panel" id="settings-general-panel">
                   <label class="setting-field" for="interface-language"><span data-i18n="settings.language">Interface language</span>
                     <select id="interface-language">
-                      <option value="en">English</option>
-                      <option value="es">Español</option>
+                      <option value="en">english</option>
+                      <option value="es">español</option>
                     </select>
                   </label>
                   <p class="settings-help" data-i18n="settings.language-help">Choose the language used by the home screen and settings.</p>
@@ -302,8 +302,8 @@
                 </section>
                 <section class="settings-panel" id="settings-privacy-panel" hidden="hidden">
                   <div class="privacy-notice">
-                    <h4 data-i18n="privacy.title">Browsing privacy</h4>
-                    <p class="settings-help" data-i18n="privacy.body">Blueberry does not disguise websites as Google Docs or hide their destinations. In-app history is stored only for this browser session; websites, proxy providers, and network administrators may still see connection activity.</p>
+                    <h4 data-i18n="privacy.title">Website cloaker</h4>
+                    <p class="settings-help" data-i18n="privacy.body">Blueberry will be adding the website cloaker in release version 1.0.0. Please bare with us as we update blueberry.</p>
                   </div>
                 </section>
                 <section class="settings-panel" id="settings-proxy-panel">
@@ -326,7 +326,7 @@
                   <h4 data-i18n="about.product">BlueberryUB</h4>
                   <p class="settings-help" data-i18n="about.description">A lightweight browser and app launcher created by Christian Hall.</p>
                   <div class="credits-list">
-                    <div class="credits-row"><span data-i18n="about.version">Version</span><strong>0.1.0</strong></div>
+                    <div class="credits-row"><span data-i18n="about.version">Version</span><strong>0.0.7</strong></div>
                     <div class="credits-row"><span data-i18n="about.creator">Creator</span><span>Christian Hall</span></div>
                     <div class="credits-row"><span data-i18n="about.proxy">Proxy runtime</span><a href="https://www.npmjs.com/package/@mercuryworkshop/proxy-bootstrap" target="_blank" rel="noopener noreferrer">MercuryWorkshop / Scramjet</a></div>
                     <div class="credits-row"><span data-i18n="about.transport">Transport</span><a href="https://www.npmjs.com/package/@mercuryworkshop/epoxy-transport" target="_blank" rel="noopener noreferrer">MercuryWorkshop / Epoxy</a></div>

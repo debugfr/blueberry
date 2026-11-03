@@ -43,10 +43,10 @@ history. History can be paused or cleared from Profile.
 ## Static app settings
 
 The static app's Settings menu includes General (English and Spanish for the
-home screen and settings), Privacy, Proxy, and About pages. The privacy page
-explains that the app does not disguise destination websites and that session
-history does not conceal activity from sites, proxy providers, or network
-administrators. About lists the app version and upstream project credits.
+home screen and settings), Appearance, Privacy, Proxy, and About pages. The
+privacy page explains that the app does not disguise destination websites and
+that session history does not conceal activity from sites, proxy providers, or
+network administrators. About lists the app version and upstream project credits.
 The static app tab is titled BlueberryUB and uses `logo/blueub.png` for its
 favicon and app branding.
 
@@ -58,6 +58,10 @@ Selecting an app opens that site in the built-in browser. The browser has a
 Main Page logo shortcut below the address bar. The tab strip supports up to 15
 tabs and shrinks tabs as needed; the static browser does not include user-managed
 bookmarks.
+
+The Appearance settings let you select an image or looping video background,
+adjust glass blur from 0 to 100, and enable the animated rain overlay. Media is
+stored in the browser's IndexedDB; blur and rain preferences are stored locally.
 
 The app logos are stored in `apps/logos/` and are referenced relative to the
 static app so they work from the versioned jsDelivr URL.

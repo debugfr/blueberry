@@ -7,7 +7,9 @@
       <style><![CDATA[
         :root{font-family:Manrope,"Trebuchet MS",sans-serif;color:#243247;background:#e9eef2;font-synthesis:none;text-rendering:optimizeLegibility;--ink:#243247;--muted:#7a8796;--line:#d8e0e7;--blue:#347ca4;--surface:#fff}
         *{box-sizing:border-box}html,body,#app{width:100%;height:100%;margin:0}body{min-width:320px;overflow:hidden;background:radial-gradient(#cfd9df .65px,transparent .65px) #e9eef2;background-size:18px 18px}button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}[hidden]{display:none!important}.icon{width:18px;height:18px;flex:0 0 auto;object-fit:contain}
-        .shell{height:100%;display:flex;flex-direction:column}.site-nav{height:54px;display:flex;align-items:center;gap:7px;padding:0 16px;background:#f7f9fa;border-bottom:1px solid #dce4e9}.brand{display:flex;align-items:center;gap:8px;margin-right:auto;color:#344459;font-size:13px;font-weight:800}.brand img{width:31px;height:31px;object-fit:contain}.nav-button{min-height:32px;padding:0 12px;color:#627286;background:transparent;border:0;border-radius:5px;font-size:11px}.nav-button:hover,.nav-button.is-active{color:#266486;background:#e5edf2}.view{min-height:0;flex:1}
+        #app{position:relative;isolation:isolate;overflow:hidden;--glass-blur:14px}.appearance-background{position:fixed;z-index:-1;inset:0;overflow:hidden;background:radial-gradient(#cfd9df .65px,transparent .65px) #e9eef2;background-size:18px 18px}.appearance-background img,.appearance-background video{position:absolute;width:100%;height:100%;inset:0;object-fit:cover}.appearance-background video{display:none}.appearance-rain{position:fixed;z-index:5;inset:-25% 0 0;pointer-events:none;overflow:hidden;background:repeating-linear-gradient(105deg,transparent 0 12px,rgba(255,255,255,.13) 12px 13px,transparent 13px 25px);background-size:100% 115px;opacity:.38;animation:rain-fall .65s linear infinite}.appearance-rain::after{position:absolute;inset:0;content:"";background:repeating-linear-gradient(108deg,transparent 0 25px,rgba(119,168,195,.13) 25px 27px,transparent 27px 48px);background-size:100% 175px;animation:rain-fall .95s linear infinite reverse}@keyframes rain-fall{to{background-position:0 115px}}
+        .shell{position:relative;height:100%;display:flex;flex-direction:column}.site-nav{height:54px;display:flex;align-items:center;gap:7px;padding:0 16px;background:#f7f9fa;border-bottom:1px solid #dce4e9}.brand{display:flex;align-items:center;gap:8px;margin-right:auto;color:#344459;font-size:13px;font-weight:800}.brand img{width:31px;height:31px;object-fit:contain}.nav-button{min-height:32px;padding:0 12px;color:#627286;background:transparent;border:0;border-radius:5px;font-size:11px}.nav-button:hover,.nav-button.is-active{color:#266486;background:#e5edf2}.view{min-height:0;flex:1}
+        .home-view,.apps-view{background:transparent!important}.home-card,.home-option,.menu-option,.logo-frame,.tab-strip,.address-toolbar,.bookmark-bar,.settings-window,.settings-sidebar,.privacy-notice,.transport-choice,.credits-row,.browser-menu,.start-page{backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}.home-card{background:rgba(255,255,255,.52)}.home-option,.menu-option{background:rgba(244,247,249,.42)}.logo-frame{background:rgba(255,255,255,.28)}.browser-app{background:transparent}.tab-strip,.address-toolbar,.bookmark-bar{background:rgba(244,248,250,.62)}.tab-entry,.tab-entry.is-active{background:rgba(255,255,255,.48);backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}.omnibox{background:rgba(237,242,245,.56)}.browser-stage,.page-host{background:rgba(231,237,240,.3)}.start-page{background:rgba(255,255,255,.38)}.history-view{background:rgba(255,255,255,.72);backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}.settings-backdrop{background:rgba(27,42,55,.24)}.settings-window{background:rgba(255,255,255,.78)}.settings-sidebar{background:rgba(244,247,249,.62)}.settings-header,.settings-body{background:transparent}.privacy-notice,.transport-choice{background:rgba(247,249,250,.56)}.credits-row{background:rgba(255,255,255,.54)}.browser-menu{background:rgba(255,255,255,.82)}
         .home-view{height:100%;display:grid;place-items:center;padding:24px;overflow:auto}.home-card{width:min(720px,100%);padding:clamp(24px,6vw,52px);text-align:center;background:rgba(255,255,255,.82);border:1px solid #d8e1e7;border-radius:16px;box-shadow:0 16px 42px rgba(40,62,79,.1)}.home-logo{width:clamp(100px,18vw,148px);height:clamp(100px,18vw,148px);object-fit:contain;filter:drop-shadow(0 8px 14px rgba(40,62,79,.14))}.home-card h1{margin:12px 0 6px;color:#26384b;font-size:clamp(26px,5vw,39px)}.home-card p{margin:0;color:#7a8796;font-size:12px}.home-options{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin:28px 0}.home-option{min-width:112px;min-height:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#344459;background:#f4f7f9;border:1px solid #e1e8ed;border-radius:9px;font-size:11px}.home-option:hover{color:#266486;background:#eaf2f6}.home-option .icon{width:24px;height:24px}
         .browser-app{height:100%;display:flex;flex-direction:column;overflow:hidden;background:#f7f9fa}.tab-strip{min-height:45px;display:flex;align-items:center;gap:6px;padding:5px 9px 0;background:#eaf0f4;border-bottom:1px solid #dce4e9}.tab-list{min-width:0;height:39px;display:flex;flex:1;align-items:flex-end;gap:4px;overflow:auto}.tab-entry{width:clamp(130px,20vw,220px);height:33px;display:flex;align-items:center;gap:3px;padding:0 5px 0 9px;color:#667687;background:#e2e9ee;border:1px solid transparent;border-radius:7px 7px 0 0}.tab-entry.is-active{height:35px;color:#344459;background:#f7f9fa;border-color:#dce4e9;border-bottom-color:#f7f9fa}.tab-button{min-width:0;height:100%;display:flex;flex:1;align-items:center;gap:7px;padding:0;color:inherit;background:transparent;border:0;text-align:left}.tab-favicon{width:17px;height:17px;object-fit:contain}.tab-title{overflow:hidden;font-size:10px;font-weight:600;text-overflow:ellipsis;white-space:nowrap}.tab-close,.chrome-icon-button,.new-tab-button,.bookmark-button,.go-button{display:grid;place-items:center;padding:0;color:#627286;background:transparent;border:0;border-radius:5px}.tab-close{width:23px;height:23px}.tab-close .icon{width:14px;height:14px}.chrome-icon-button,.new-tab-button{width:33px;height:33px}.chrome-icon-button:hover,.tab-close:hover,.new-tab-button:hover,.bookmark-button:hover{color:#266486;background:#e5edf2}
         .address-toolbar{min-height:53px;display:flex;align-items:center;gap:8px;padding:7px 10px;background:#f7f9fa;border-bottom:1px solid #e1e7eb}.nav-controls{display:flex;align-items:center}.chrome-icon-button:disabled{color:#b9c3cc;cursor:default}.omnibox{min-width:0;height:37px;display:flex;flex:1;align-items:center;gap:8px;padding:0 8px 0 11px;color:#718397;background:#edf2f5;border:1px solid #e0e7ec;border-radius:6px}.omnibox:focus-within{background:#fff;border-color:#83abc0;box-shadow:0 0 0 3px rgba(67,132,164,.12)}.omnibox input{width:100%;min-width:0;padding:0;color:#243247;background:transparent;border:0;outline:0;font-family:monospace;font-size:11px}.bookmark-button{width:29px;height:29px}.bookmark-button.is-bookmarked{filter:sepia(1) saturate(3)}.bookmark-button:disabled{opacity:.45}.go-button{width:34px;height:34px;flex:0 0 auto;color:white;background:#3981a2}.go-button:hover{background:#286687}.menu-wrap{position:relative}.browser-menu{position:absolute;z-index:20;top:calc(100% + 6px);right:0;width:220px;padding:6px;background:#fff;border:1px solid #dce4e9;border-radius:7px;box-shadow:0 12px 30px rgba(28,43,55,.2)}.browser-menu button{width:100%;min-height:35px;padding:0 9px;color:#344459;background:transparent;border:0;border-radius:4px;text-align:left;font-size:10px}.browser-menu button:hover{background:#edf3f6}.bookmark-bar{min-height:34px;display:flex;align-items:center;gap:7px;padding:0 12px;overflow:auto;background:#f8fafb;border-bottom:1px solid #e3e9ed}.bookmark-label{flex:0 0 auto;color:#a0aab4;font:8px monospace;letter-spacing:.7px}.bookmark-link{max-width:180px;height:26px;display:flex;flex:0 0 auto;align-items:center;gap:6px;padding:0 7px;color:#596a7b;background:transparent;border:0;border-radius:4px;font-size:9px}.bookmark-link:hover{background:#edf3f6}.bookmark-link img{width:14px;height:14px;object-fit:contain}
@@ -29,6 +31,19 @@
       <style>
         .quick-link-mark .quick-link-favicon{width:23px;height:23px;display:block;margin:auto;object-fit:contain}
         .bookmark-favicon{width:14px;height:14px;display:block;margin:auto;object-fit:contain}
+        .appearance-panel{display:grid;gap:14px}
+        .appearance-control{display:grid;gap:8px;color:#40546a;font-size:11px;font-weight:700}
+        .appearance-control input[type=file]{width:100%;padding:9px;color:#526579;background:rgba(255,255,255,.55);border:1px solid #dce5eb;border-radius:6px;font-size:10px}
+        .appearance-blur-row{display:flex;align-items:center;gap:12px}
+        .appearance-blur-row input{min-width:0;flex:1;accent-color:#347ca4}
+        .appearance-blur-row output{min-width:42px;color:#347ca4;text-align:right;font-variant-numeric:tabular-nums}
+        .appearance-toggle{display:flex;align-items:center;gap:9px;color:#40546a;font-size:11px;font-weight:700}
+        .appearance-toggle input{accent-color:#347ca4}
+        .appearance-actions{display:flex;align-items:center;gap:10px}
+        .appearance-reset{min-height:32px;padding:0 11px;color:#496176;background:rgba(255,255,255,.55);border:1px solid #d8e2e8;border-radius:5px;font-size:10px;font-weight:700}
+        .appearance-reset:hover{color:#266486;background:rgba(242,247,250,.8)}
+        .appearance-status{min-width:0;overflow-wrap:anywhere;color:#758494;font-size:10px;line-height:1.45}
+        @media(prefers-reduced-motion:reduce){.appearance-rain,.appearance-rain::after{animation:none}}
       </style>
       <style>
         .start-page{background:#fff;background-size:auto}
@@ -73,6 +88,48 @@
         .credits-row a:hover{text-decoration:underline}
         @media(max-width:560px){.settings-backdrop{padding:10px}.settings-window{height:min(560px,calc(100vh - 20px));grid-template-columns:112px minmax(0,1fr)}.settings-sidebar{padding:16px 7px}.settings-sidebar h2{margin-left:7px;font-size:13px}.settings-nav{gap:6px;padding:0 7px;font-size:10px}.settings-header{min-height:68px;padding:12px}.settings-body{padding:14px}.transport-choices{grid-template-columns:1fr}.settings-footer{align-items:flex-start;flex-direction:column}}
       </style>
+      <style>
+        html,body{background:transparent}
+        .appearance-background{z-index:-1}
+        .shell{background:transparent}
+        .home-view,.apps-view{background:transparent!important}
+        .home-card{background:rgba(255,255,255,.52)}
+        .home-option,.menu-option{background:rgba(244,247,249,.42)}
+        .logo-frame{background:rgba(255,255,255,.28)}
+        .home-card,.home-option,.menu-option,.logo-frame,.tab-strip,.address-toolbar,.bookmark-bar,.settings-window,.settings-sidebar,.privacy-notice,.transport-choice,.credits-row,.browser-menu,.start-page,.history-view{backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+        .browser-app{background:transparent}
+        .tab-strip,.address-toolbar,.bookmark-bar{background:rgba(244,248,250,.62)}
+        .tab-entry,.tab-entry.is-active{background:rgba(255,255,255,.48);backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+        .omnibox{background:rgba(237,242,245,.56)}
+        .browser-stage,.page-host{background:rgba(231,237,240,.3)}
+        .start-page{background:rgba(255,255,255,.38)}
+        .history-view{background:rgba(255,255,255,.72)}
+        .settings-backdrop{background:rgba(27,42,55,.24)}
+        .settings-window{background:rgba(255,255,255,.78)}
+        .settings-sidebar{background:rgba(244,247,249,.62)}
+        .settings-header,.settings-body{background:transparent}
+        .privacy-notice,.transport-choice{background:rgba(247,249,250,.56)}
+        .credits-row{background:rgba(255,255,255,.54)}
+        .browser-menu{background:rgba(255,255,255,.82)}
+        .appearance-panel{display:grid;gap:14px}
+        .appearance-control{display:grid;gap:8px;color:#40546a;font-size:11px;font-weight:700}
+        .appearance-control input[type=file]{width:100%;padding:9px;color:#526579;background:rgba(255,255,255,.55);border:1px solid #dce5eb;border-radius:6px;font-size:10px}
+        .appearance-blur-row{display:flex;align-items:center;gap:12px}
+        .appearance-blur-row input{min-width:0;flex:1;accent-color:#347ca4}
+        .appearance-blur-row output{min-width:42px;color:#347ca4;text-align:right;font-variant-numeric:tabular-nums}
+        .appearance-toggle{display:flex;align-items:center;gap:9px;color:#40546a;font-size:11px;font-weight:700}
+        .appearance-toggle input{accent-color:#347ca4}
+        .appearance-actions{display:flex;align-items:center;gap:10px}
+        .appearance-reset{min-height:32px;padding:0 11px;color:#496176;background:rgba(255,255,255,.55);border:1px solid #d8e2e8;border-radius:5px;font-size:10px;font-weight:700}
+        .appearance-reset:hover{color:#266486;background:rgba(242,247,250,.8)}
+        .appearance-status{min-width:0;overflow-wrap:anywhere;color:#758494;font-size:10px;line-height:1.45}
+        @media(prefers-reduced-motion:reduce){.appearance-rain,.appearance-rain::after{animation:none}}
+      </style>
+      <div class="appearance-background" id="appearance-background" aria-hidden="true">
+        <img id="appearance-background-image" alt="" hidden="hidden" />
+        <video id="appearance-background-video" muted="muted" loop="loop" playsinline="playsinline" aria-hidden="true"></video>
+      </div>
+      <div class="appearance-rain" id="appearance-rain" aria-hidden="true" hidden="hidden"></div>
       <div class="shell">
         <section class="boot-screen" id="startup-screen" data-state="loading" role="status" aria-live="polite">
           <div class="boot-card">
@@ -212,6 +269,7 @@
             <aside class="settings-sidebar">
               <h2 data-i18n="settings.title">Settings</h2>
               <button class="settings-nav is-active" type="button" data-settings-page="general"><span data-icon="globe"></span><span data-i18n="settings.general">General</span></button>
+              <button class="settings-nav" type="button" data-settings-page="appearance"><span data-icon="edit"></span><span data-i18n="settings.appearance">Appearance</span></button>
               <button class="settings-nav" type="button" data-settings-page="privacy"><span data-icon="star"></span><span data-i18n="settings.privacy">Privacy</span></button>
               <button class="settings-nav" type="button" data-settings-page="proxy"><span data-icon="globe"></span><span data-i18n="settings.proxy">Proxy</span></button>
               <button class="settings-nav" type="button" data-settings-page="about"><span data-icon="star"></span><span data-i18n="settings.about">About</span></button>
@@ -230,6 +288,17 @@
                     </select>
                   </label>
                   <p class="settings-help" data-i18n="settings.language-help">Choose the language used by the home screen and settings.</p>
+                </section>
+                <section class="settings-panel appearance-panel" id="settings-appearance-panel" hidden="hidden">
+                  <label class="appearance-control" for="appearance-background-file"><span data-i18n="appearance.background">Background image or live video</span>
+                    <input id="appearance-background-file" type="file" accept="image/*,video/*" />
+                  </label>
+                  <p class="settings-help" data-i18n="appearance.background-help">Choose an image or a video that loops silently as the background throughout BlueberryUB.</p>
+                  <label class="appearance-control" for="appearance-blur"><span data-i18n="appearance.blur">Glass blur</span>
+                    <span class="appearance-blur-row"><input id="appearance-blur" type="range" min="0" max="100" step="1" value="14" /><output id="appearance-blur-value" for="appearance-blur">14</output></span>
+                  </label>
+                  <label class="appearance-toggle"><input id="appearance-rain-toggle" type="checkbox" /><span data-i18n="appearance.rain">Rain on the glass</span></label>
+                  <div class="appearance-actions"><button class="appearance-reset" id="appearance-reset-background" type="button" data-i18n="appearance.reset">Remove custom background</button><span class="appearance-status" id="appearance-status" role="status" aria-live="polite"></span></div>
                 </section>
                 <section class="settings-panel" id="settings-privacy-panel" hidden="hidden">
                   <div class="privacy-notice">
@@ -463,21 +532,187 @@
         const settingsPageTitle = document.querySelector("#settings-page-title");
         const settingsPageDescription = document.querySelector("#settings-page-description");
         const interfaceLanguage = document.querySelector("#interface-language");
+        const appearanceBackgroundFile = document.querySelector("#appearance-background-file");
+        const appearanceBlur = document.querySelector("#appearance-blur");
+        const appearanceBlurValue = document.querySelector("#appearance-blur-value");
+        const appearanceRainToggle = document.querySelector("#appearance-rain-toggle");
+        const appearanceRain = document.querySelector("#appearance-rain");
+        const appearanceImage = document.querySelector("#appearance-background-image");
+        const appearanceVideo = document.querySelector("#appearance-background-video");
+        const appearanceStatus = document.querySelector("#appearance-status");
+        const appearanceKey = "blueberryub.static-appearance";
+        const appearanceDbName = "blueberryub-appearance";
+        const defaultAppearance = { blur: 14, rain: false };
+        let appearanceSettings = { ...defaultAppearance };
+        let appearanceObjectUrl = null;
+        function readAppearanceSettings() {
+          try {
+            const stored = JSON.parse(localStorage.getItem(appearanceKey) || "null");
+            if (!stored || typeof stored !== "object") return { ...defaultAppearance };
+            const blur = Number(stored.blur);
+            return {
+              blur: Number.isFinite(blur) ? Math.min(100, Math.max(0, Math.round(blur))) : defaultAppearance.blur,
+              rain: stored.rain === true
+            };
+          } catch (error) {
+            console.warn("Could not read appearance settings:", error);
+            return { ...defaultAppearance };
+          }
+        }
+        function applyAppearanceSettings() {
+          appearanceBlur.value = String(appearanceSettings.blur);
+          appearanceBlurValue.value = `${appearanceSettings.blur}px`;
+          appearanceRainToggle.checked = appearanceSettings.rain;
+          appearanceRain.hidden = !appearanceSettings.rain;
+          document.querySelector("#app").style.setProperty("--glass-blur", `${appearanceSettings.blur}px`);
+        }
+        function persistAppearanceSettings() {
+          try {
+            localStorage.setItem(appearanceKey, JSON.stringify(appearanceSettings));
+          } catch (error) {
+            showStatus("Could not save appearance settings: " + error.message);
+          }
+        }
+        function openAppearanceDatabase() {
+          return new Promise((resolve, reject) => {
+            if (!window.indexedDB) {
+              reject(new Error("This browser does not support persistent background storage."));
+              return;
+            }
+            const request = indexedDB.open(appearanceDbName, 1);
+            request.onupgradeneeded = () => request.result.createObjectStore("assets");
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error || new Error("Could not open background storage."));
+            request.onblocked = () => reject(new Error("Background storage is blocked by another tab."));
+          });
+        }
+        function saveAppearanceAsset(asset) {
+          return openAppearanceDatabase().then((database) => new Promise((resolve, reject) => {
+            const transaction = database.transaction("assets", "readwrite");
+            transaction.objectStore("assets").put(asset, "background");
+            transaction.oncomplete = () => { database.close(); resolve(); };
+            transaction.onerror = () => { database.close(); reject(transaction.error || new Error("Could not save the background file.")); };
+            transaction.onabort = () => { database.close(); reject(transaction.error || new Error("Saving the background file was cancelled.")); };
+          }));
+        }
+        function readAppearanceAsset() {
+          return openAppearanceDatabase().then((database) => new Promise((resolve, reject) => {
+            const transaction = database.transaction("assets", "readonly");
+            const request = transaction.objectStore("assets").get("background");
+            request.onsuccess = () => { database.close(); resolve(request.result || null); };
+            request.onerror = () => { database.close(); reject(request.error || new Error("Could not load the saved background.")); };
+          }));
+        }
+        function removeAppearanceAsset() {
+          return openAppearanceDatabase().then((database) => new Promise((resolve, reject) => {
+            const transaction = database.transaction("assets", "readwrite");
+            transaction.objectStore("assets").delete("background");
+            transaction.oncomplete = () => { database.close(); resolve(); };
+            transaction.onerror = () => { database.close(); reject(transaction.error || new Error("Could not remove the background file.")); };
+            transaction.onabort = () => { database.close(); reject(transaction.error || new Error("Removing the background file was cancelled.")); };
+          }));
+        }
+        function displayAppearanceAsset(asset) {
+          if (appearanceObjectUrl) URL.revokeObjectURL(appearanceObjectUrl);
+          appearanceObjectUrl = null;
+          appearanceVideo.pause();
+          appearanceVideo.removeAttribute("src");
+          appearanceVideo.load();
+          appearanceImage.removeAttribute("src");
+          appearanceImage.hidden = true;
+          appearanceVideo.style.display = "none";
+          if (!asset?.blob) {
+            appearanceStatus.textContent = "";
+            return;
+          }
+          appearanceObjectUrl = URL.createObjectURL(asset.blob);
+          appearanceStatus.textContent = asset.name || "Custom background";
+          if (asset.type?.startsWith("video/")) {
+            appearanceVideo.src = appearanceObjectUrl;
+            appearanceVideo.style.display = "block";
+            appearanceVideo.load();
+            appearanceVideo.play().catch((error) => {
+              console.warn("Could not autoplay the appearance video:", error);
+              appearanceStatus.textContent = "Video saved; playback could not start automatically.";
+            });
+          } else {
+            appearanceImage.src = appearanceObjectUrl;
+            appearanceImage.hidden = false;
+          }
+        }
+        async function loadAppearanceAsset() {
+          try {
+            displayAppearanceAsset(await readAppearanceAsset());
+          } catch (error) {
+            console.error("Could not load the saved appearance background:", error);
+            appearanceStatus.textContent = "Could not load background: " + error.message;
+          }
+        }
+        appearanceSettings = readAppearanceSettings();
+        applyAppearanceSettings();
+        appearanceBlur.addEventListener("input", () => {
+          appearanceSettings.blur = Number(appearanceBlur.value);
+          applyAppearanceSettings();
+          persistAppearanceSettings();
+        });
+        appearanceRainToggle.addEventListener("change", () => {
+          appearanceSettings.rain = appearanceRainToggle.checked;
+          applyAppearanceSettings();
+          persistAppearanceSettings();
+        });
+        appearanceBackgroundFile.addEventListener("change", async () => {
+          const file = appearanceBackgroundFile.files?.[0];
+          if (!file) return;
+          if (!file.type.startsWith("image/") && !file.type.startsWith("video/")) {
+            appearanceStatus.textContent = "Choose an image or video file.";
+            appearanceBackgroundFile.value = "";
+            return;
+          }
+          try {
+            const asset = { blob: file, name: file.name, type: file.type };
+            await saveAppearanceAsset(asset);
+            displayAppearanceAsset(asset);
+          } catch (error) {
+            console.error("Could not save the appearance background:", error);
+            appearanceStatus.textContent = "Could not save background: " + error.message;
+            showStatus("Could not save appearance background: " + error.message);
+          } finally {
+            appearanceBackgroundFile.value = "";
+          }
+        });
+        document.querySelector("#appearance-reset-background").addEventListener("click", async () => {
+          try {
+            await removeAppearanceAsset();
+            displayAppearanceAsset(null);
+          } catch (error) {
+            console.error("Could not remove the appearance background:", error);
+            appearanceStatus.textContent = "Could not remove background: " + error.message;
+            showStatus("Could not remove appearance background: " + error.message);
+          }
+        });
+        loadAppearanceAsset();
         const languageKey = "blueberryub.static-language";
         const settingsTranslations = {
           en: {
             "settings.title": "Settings",
             "settings.close": "Close settings",
             "settings.general": "General",
+            "settings.appearance": "Appearance",
             "settings.privacy": "Privacy",
             "settings.proxy": "Proxy",
             "settings.about": "About",
             "settings.general-description": "Choose your interface language and preferences.",
+            "settings.appearance-description": "Personalize the shared background and glass effects.",
             "settings.privacy-description": "Learn what Blueberry does and does not keep private.",
             "settings.proxy-description": "Choose how this browser connects to proxy routes.",
             "settings.about-description": "Version, acknowledgements, and project links.",
             "settings.language": "Interface language",
             "settings.language-help": "Choose the language used by the home screen and settings.",
+            "appearance.background": "Background image or live video",
+            "appearance.background-help": "Choose an image or a video that loops silently as the background throughout BlueberryUB.",
+            "appearance.blur": "Glass blur",
+            "appearance.rain": "Rain on the glass",
+            "appearance.reset": "Remove custom background",
             "privacy.title": "Browsing privacy",
             "privacy.body": "Blueberry does not disguise websites as Google Docs or hide their destinations. In-app history is stored only for this browser session; websites, proxy providers, and network administrators may still see connection activity.",
             "proxy.engine": "Proxy engine",
@@ -503,15 +738,22 @@
             "settings.title": "Configuración",
             "settings.close": "Cerrar configuración",
             "settings.general": "General",
+            "settings.appearance": "Apariencia",
             "settings.privacy": "Privacidad",
             "settings.proxy": "Proxy",
             "settings.about": "Acerca de",
             "settings.general-description": "Elige el idioma y las preferencias de la interfaz.",
+            "settings.appearance-description": "Personaliza el fondo compartido y los efectos de cristal.",
             "settings.privacy-description": "Consulta qué datos mantiene privados Blueberry y cuáles no.",
             "settings.proxy-description": "Elige cómo se conecta este navegador a las rutas proxy.",
             "settings.about-description": "Versión, agradecimientos y enlaces del proyecto.",
             "settings.language": "Idioma de la interfaz",
             "settings.language-help": "Elige el idioma de la pantalla de inicio y la configuración.",
+            "appearance.background": "Imagen de fondo o video en vivo",
+            "appearance.background-help": "Elige una imagen o un video que se repetirá en silencio como fondo de BlueberryUB.",
+            "appearance.blur": "Desenfoque del cristal",
+            "appearance.rain": "Lluvia sobre el cristal",
+            "appearance.reset": "Quitar fondo personalizado",
             "privacy.title": "Privacidad de navegación",
             "privacy.body": "Blueberry no disfraza sitios web como Google Docs ni oculta sus destinos. El historial de la aplicación solo se guarda durante esta sesión; los sitios web, proveedores del proxy y administradores de red aún pueden ver la actividad de conexión.",
             "proxy.engine": "Motor proxy",
@@ -559,6 +801,7 @@
         function showSettingsPage(name) {
           const pages = {
             general: ["settings-general-panel", "settings.general", "settings.general-description"],
+            appearance: ["settings-appearance-panel", "settings.appearance", "settings.appearance-description"],
             privacy: ["settings-privacy-panel", "settings.privacy", "settings.privacy-description"],
             proxy: ["settings-proxy-panel", "settings.proxy", "settings.proxy-description"],
             about: ["settings-about-panel", "settings.about", "settings.about-description"]

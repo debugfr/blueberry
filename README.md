@@ -52,10 +52,12 @@ favicon and app branding.
 
 ## Apps
 
-The Apps view in `static/index.svg` displays the 12 supplied logos in a
-responsive grid with up to six apps per row. Selecting a logo opens that site
-in the built-in browser. The tab strip supports up to 15 tabs and shrinks tabs
-as needed; the static browser does not include bookmarks.
+The Apps view in `static/index.svg` displays a Main Page shortcut followed by
+the 12 supplied app logos in a responsive grid with up to six items per row.
+Selecting an app opens that site in the built-in browser. The browser has a
+Main Page logo shortcut below the address bar. The tab strip supports up to 15
+tabs and shrinks tabs as needed; the static browser does not include user-managed
+bookmarks.
 
 The app logos are stored in `apps/logos/` and are referenced relative to the
 static app so they work from the versioned jsDelivr URL.

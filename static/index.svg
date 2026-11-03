@@ -11,6 +11,10 @@
         .home-view{height:100%;display:grid;place-items:center;padding:24px;overflow:auto}.home-card{width:min(720px,100%);padding:clamp(24px,6vw,52px);text-align:center;background:rgba(255,255,255,.82);border:1px solid #d8e1e7;border-radius:16px;box-shadow:0 16px 42px rgba(40,62,79,.1)}.home-logo{width:clamp(100px,18vw,148px);height:clamp(100px,18vw,148px);object-fit:contain;filter:drop-shadow(0 8px 14px rgba(40,62,79,.14))}.home-card h1{margin:12px 0 6px;color:#26384b;font-size:clamp(26px,5vw,39px)}.home-card p{margin:0;color:#7a8796;font-size:12px}.home-options{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin:28px 0}.home-option{min-width:112px;min-height:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#344459;background:#f4f7f9;border:1px solid #e1e8ed;border-radius:9px;font-size:11px}.home-option:hover{color:#266486;background:#eaf2f6}.home-option .icon{width:24px;height:24px}
         .browser-app{height:100%;display:flex;flex-direction:column;overflow:hidden;background:#f7f9fa}.tab-strip{min-height:45px;display:flex;align-items:center;gap:6px;padding:5px 9px 0;background:#eaf0f4;border-bottom:1px solid #dce4e9}.tab-list{min-width:0;height:39px;display:flex;flex:1;align-items:flex-end;gap:4px;overflow:auto}.tab-entry{width:clamp(130px,20vw,220px);height:33px;display:flex;align-items:center;gap:3px;padding:0 5px 0 9px;color:#667687;background:#e2e9ee;border:1px solid transparent;border-radius:7px 7px 0 0}.tab-entry.is-active{height:35px;color:#344459;background:#f7f9fa;border-color:#dce4e9;border-bottom-color:#f7f9fa}.tab-button{min-width:0;height:100%;display:flex;flex:1;align-items:center;gap:7px;padding:0;color:inherit;background:transparent;border:0;text-align:left}.tab-favicon{width:17px;height:17px;object-fit:contain}.tab-title{overflow:hidden;font-size:10px;font-weight:600;text-overflow:ellipsis;white-space:nowrap}.tab-close,.chrome-icon-button,.new-tab-button,.bookmark-button,.go-button{display:grid;place-items:center;padding:0;color:#627286;background:transparent;border:0;border-radius:5px}.tab-close{width:23px;height:23px}.tab-close .icon{width:14px;height:14px}.chrome-icon-button,.new-tab-button{width:33px;height:33px}.chrome-icon-button:hover,.tab-close:hover,.new-tab-button:hover,.bookmark-button:hover{color:#266486;background:#e5edf2}
         .address-toolbar{min-height:53px;display:flex;align-items:center;gap:8px;padding:7px 10px;background:#f7f9fa;border-bottom:1px solid #e1e7eb}.nav-controls{display:flex;align-items:center}.chrome-icon-button:disabled{color:#b9c3cc;cursor:default}.omnibox{min-width:0;height:37px;display:flex;flex:1;align-items:center;gap:8px;padding:0 8px 0 11px;color:#718397;background:#edf2f5;border:1px solid #e0e7ec;border-radius:6px}.omnibox:focus-within{background:#fff;border-color:#83abc0;box-shadow:0 0 0 3px rgba(67,132,164,.12)}.omnibox input{width:100%;min-width:0;padding:0;color:#243247;background:transparent;border:0;outline:0;font-family:monospace;font-size:11px}.bookmark-button{width:29px;height:29px}.bookmark-button.is-bookmarked{filter:sepia(1) saturate(3)}.bookmark-button:disabled{opacity:.45}.go-button{width:34px;height:34px;flex:0 0 auto;color:white;background:#3981a2}.go-button:hover{background:#286687}.menu-wrap{position:relative}.browser-menu{position:absolute;z-index:20;top:calc(100% + 6px);right:0;width:220px;padding:6px;background:#fff;border:1px solid #dce4e9;border-radius:7px;box-shadow:0 12px 30px rgba(28,43,55,.2)}.browser-menu button{width:100%;min-height:35px;padding:0 9px;color:#344459;background:transparent;border:0;border-radius:4px;text-align:left;font-size:10px}.browser-menu button:hover{background:#edf3f6}.bookmark-bar{min-height:34px;display:flex;align-items:center;gap:7px;padding:0 12px;overflow:auto;background:#f8fafb;border-bottom:1px solid #e3e9ed}.bookmark-label{flex:0 0 auto;color:#a0aab4;font:8px monospace;letter-spacing:.7px}.bookmark-link{max-width:180px;height:26px;display:flex;flex:0 0 auto;align-items:center;gap:6px;padding:0 7px;color:#596a7b;background:transparent;border:0;border-radius:4px;font-size:9px}.bookmark-link:hover{background:#edf3f6}.bookmark-link img{width:14px;height:14px;object-fit:contain}
+        .main-page-bookmark{position:relative;width:36px;justify-content:center;padding:0;overflow:visible}
+        .main-page-bookmark img{width:23px;height:23px}
+        .main-page-bookmark .main-page-label{position:absolute;z-index:2;top:calc(100% + 5px);left:50%;padding:5px 8px;color:#fff;background:#26384b;border-radius:4px;font-size:9px;white-space:nowrap;opacity:0;pointer-events:none;transform:translateX(-50%);transition:opacity 120ms ease}
+        .main-page-bookmark:hover .main-page-label,.main-page-bookmark:focus-visible .main-page-label{opacity:1}
         .browser-stage{position:relative;min-height:0;flex:1;overflow:hidden;background:#e7edf0}.page-host{position:relative;width:100%;height:100%;background:#fff}.tab-page{position:absolute;inset:0;overflow:hidden;background:#fff}.start-page{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 18px;overflow:auto;background:radial-gradient(#e7edf0 .7px,transparent .7px) #fff;background-size:18px 18px}.start-page img{width:84px;height:84px;object-fit:contain}.start-page h2{margin:13px 0 5px;color:#26384b;font-size:clamp(25px,4vw,36px)}.start-page p{margin:0;color:#8794a1;font-size:12px}.quick-links{display:grid;grid-template-columns:repeat(4,minmax(70px,92px));gap:13px;margin-top:27px}.quick-link{display:flex;flex-direction:column;align-items:center;gap:7px;padding:6px;color:#536478;background:transparent;border:0;border-radius:7px;font-size:10px}.quick-link:hover{color:#246384;background:#f2f6f8}.quick-link-mark{width:46px;height:46px;display:grid;place-items:center;background:#edf4f8;border:1px solid #e1e9ee;border-radius:13px}.quick-link-mark .icon{width:23px;height:23px}.site-frame{width:100%;height:100%;border:0;background:#fff}.page-message{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:25px;text-align:center;background:#fff}.page-message h2{margin:0;font-size:18px}.page-message p{max-width:480px;margin:0;color:#7f8c99;font-size:12px;overflow-wrap:anywhere}.loading-spinner{width:24px;height:24px;border:2px solid #d8e2e8;border-top-color:#3981a2;border-radius:50%;animation:spin .8s linear infinite}
         .history-view{position:absolute;z-index:10;inset:0;display:flex;flex-direction:column;padding:clamp(16px,5vw,40px);overflow:auto;background:#fff}.history-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #e2e8ec}.history-header h2{margin:0;font-size:21px}.history-actions{display:flex;gap:6px}.history-actions input{min-width:0;width:min(34vw,240px);height:32px;padding:0 9px;border:1px solid #dfe6eb;border-radius:5px;font-size:10px}.history-list{width:min(740px,100%);margin:12px auto}.history-item{width:100%;display:flex;justify-content:space-between;gap:12px;padding:11px 5px;color:#40546a;background:transparent;border:0;border-bottom:1px solid #edf0f2;text-align:left}.history-item:hover{background:#f8fafb}.history-item span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.history-item time{flex:0 0 auto;color:#8b98a4;font-size:9px}.status{position:fixed;z-index:50;right:10px;bottom:10px;max-width:min(440px,calc(100vw - 20px));padding:8px 11px;color:#fff;background:#344459;border-radius:5px;font-size:10px;box-shadow:0 3px 14px #0002}
         @keyframes spin{to{transform:rotate(360deg)}}@media(max-width:700px){.site-nav{height:48px;padding:0 8px}.brand{font-size:11px}.nav-button{padding:0 8px;font-size:10px}.address-toolbar{flex-wrap:wrap;gap:6px;padding:7px}.omnibox{order:0;flex-basis:100%}.nav-controls{order:1}.go-button{margin-left:auto}.bookmark-bar{min-height:31px}.quick-links{grid-template-columns:repeat(2,82px);gap:10px 16px}.history-header{align-items:flex-start;flex-direction:column}.history-actions{width:100%}.history-actions input{flex:1;width:auto}}
@@ -89,9 +93,6 @@
           .apps-heading{width:min(820px,100%);display:flex;flex-direction:column;gap:18px}
           .apps-heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
           .apps-heading h1{margin:0;color:#26384b;font-size:clamp(25px,4vw,36px);font-weight:800}
-          .apps-view-actions{display:flex;flex-wrap:wrap;gap:8px}
-          .apps-view-actions button{min-height:34px;padding:0 12px;color:#496176;background:#fff;border:1px solid #d8e2e8;border-radius:6px;font-size:11px;font-weight:700}
-          .apps-view-actions button:hover{color:#266486;background:#f2f7fa;border-color:#b9cfda}
           .apps-tools{display:flex;align-items:center;gap:12px}
           .apps-search{height:40px;display:flex;flex:1;align-items:center;gap:9px;padding:0 12px;color:#7a8796;background:#fff;border:1px solid #d8e2e8;border-radius:7px}
           .apps-search:focus-within{border-color:#83abc0;box-shadow:0 0 0 3px rgba(67,132,164,.12)}
@@ -148,10 +149,6 @@
           <header class="apps-heading">
             <div class="apps-heading-row">
               <h1>Apps</h1>
-              <div class="apps-view-actions">
-                <button type="button" data-view="home">Back to BlueberryUB</button>
-                <button type="button" data-view="browser">Open Browser</button>
-              </div>
             </div>
             <div class="apps-tools">
               <label class="apps-search"><span data-icon="search"></span><input id="apps-search" type="search" autocomplete="off" placeholder="Search apps" aria-label="Search apps" /></label>
@@ -196,6 +193,12 @@
               </div>
             </div>
           </form>
+          <div class="bookmark-bar" aria-label="Bookmarks">
+            <button class="bookmark-link main-page-bookmark" type="button" data-view="home" aria-label="Main Page" title="Main Page">
+              <img id="main-page-bookmark-logo" alt="" />
+              <span class="main-page-label">Main Page</span>
+            </button>
+          </div>
           <section class="browser-stage" id="browser-stage" aria-label="Browser content">
             <div class="page-host" id="page-host"></div>
             <section class="history-view" id="history-view" aria-label="Browsing history" hidden="hidden">
@@ -379,6 +382,7 @@
         const viewHistory = [];
         let currentView = "home";
         const apps = [
+          { name: "Main Page", home: true, url: "blueberryub", logo: "blueub.png" },
           { name: "Amazon", url: "amazon.com", logo: "amazon.jpeg" },
           { name: "Crunchyroll", url: "crunchyroll.com", logo: "crunchyroll.jpeg" },
           { name: "eBay", url: "ebay.com", logo: "ebay.jpeg" },
@@ -415,7 +419,8 @@
             button.setAttribute("aria-label", app.name);
             const logo = createHtmlElement("img");
             logo.className = "app-logo";
-            logo.src = new URL("../apps/logos/" + app.logo, location.href).href;
+            if (app.home) setBrandLogo(logo);
+            else logo.src = new URL("../apps/logos/" + app.logo, location.href).href;
             logo.alt = app.name;
             logo.loading = "lazy";
             logo.decoding = "async";
@@ -424,8 +429,11 @@
             label.textContent = app.name;
             button.append(logo, label);
             button.addEventListener("click", () => {
-              showView("browser");
-              navigate(app.url);
+              if (app.home) showView("home");
+              else {
+                showView("browser");
+                navigate(app.url);
+              }
             });
             appsGrid.append(button);
           }
@@ -625,7 +633,7 @@
         document.querySelectorAll("[data-view]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
         document.querySelectorAll("[data-open-browser]").forEach((button) => button.addEventListener("click", () => showView("browser")));
         document.querySelectorAll("[data-open-apps]").forEach((button) => button.addEventListener("click", () => showView("apps")));
-        document.querySelectorAll(".brand img, .home-logo").forEach(setBrandLogo);
+        document.querySelectorAll(".brand img, .home-logo, #main-page-bookmark-logo").forEach(setBrandLogo);
         setBrandLogo(document.querySelector("#hub-logo"));
         const hub = document.querySelector(".hub");
         const logoFrame = document.querySelector(".logo-frame");

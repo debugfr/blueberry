@@ -324,7 +324,7 @@
                 </section>
                 <section class="settings-panel" id="settings-about-panel" hidden="hidden">
                   <h4 data-i18n="about.product">BlueberryUB</h4>
-                  <p class="settings-help" data-i18n="about.description">A lightweight browser and app launcher created by Christian Hall.</p>
+                  <p class="settings-help" data-i18n="about.description">A lightweight and fast proxy</p>
                   <div class="credits-list">
                     <div class="credits-row"><span data-i18n="about.version">Version</span><strong>0.0.7</strong></div>
                     <div class="credits-row"><span data-i18n="about.creator">Creator</span><span>Christian Hall</span></div>
